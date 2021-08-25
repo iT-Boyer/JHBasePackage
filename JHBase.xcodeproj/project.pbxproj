@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C92D22626CE1F15005F0742 /* JHBaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92D22426CE1F15005F0742 /* JHBaseColor.swift */; };
+		4EB67E1926D64DF000A30EA4 /* JHBaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92D22426CE1F15005F0742 /* JHBaseColor.swift */; };
 		9C92D22726CE1F15005F0742 /* JHBaseUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92D22526CE1F15005F0742 /* JHBaseUI.swift */; };
 		9CE5E54C26CD29BF00F2E990 /* JHBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE5E54A26CD29BF00F2E990 /* JHBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEC8A4626D634F000089960 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEC8A4526D634F000089960 /* AppDelegate.m */; };
@@ -250,8 +250,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB67E1926D64DF000A30EA4 /* JHBaseColor.swift in Sources */,
 				9C92D22726CE1F15005F0742 /* JHBaseUI.swift in Sources */,
-				9C92D22626CE1F15005F0742 /* JHBaseColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

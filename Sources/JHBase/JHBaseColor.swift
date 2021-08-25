@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - UIColor Constant
-extension UIColor {
+@objc extension UIColor {
     public static let kClear: UIColor  = UIColor.clear
     public static let k119B83: UIColor = UIColor.initWithHex("119B83")
     public static let k151515: UIColor = UIColor.initWithHex("151515")
@@ -116,7 +116,7 @@ extension UIColor {
 }
 
 // MARK: - Hex to UIColor
-extension UIColor {
+@objc extension UIColor {
     public static func initWithHex(_ hex: String) -> UIColor {
         var hexStr: String = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         if hexStr.hasPrefix("#") {
