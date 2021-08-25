@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - UIColor Constant
 extension UIColor {
-    public static let kClear: UIColor = UIColor.clear
+    public static let kClear: UIColor  = UIColor.clear
     public static let k119B83: UIColor = UIColor.initWithHex("119B83")
     public static let k151515: UIColor = UIColor.initWithHex("151515")
     public static let k0ED72F: UIColor = UIColor.initWithHex("0ED72F")
@@ -146,6 +146,17 @@ extension UIColor {
         let alpha = CGFloat(a) / 255.0
         
         return UIColor.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    public static func randomColor() -> UIColor{
+        #if DEBUG
+            let r = CGFloat(arc4random()%255)/255
+            let g = CGFloat(arc4random()%255)/255
+            let b = CGFloat(arc4random()%255)/255
+            return UIColor.init(red: r, green: g, blue: b, alpha: 1.0)
+        #else
+            return UIColor.clear;
+        #endif
     }
 }
 
