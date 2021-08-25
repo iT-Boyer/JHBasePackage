@@ -11,6 +11,7 @@ public let kScreenBounds: CGRect = UIScreen.main.bounds
 public let kScreenWidth: CGFloat = UIScreen.main.bounds.size.width
 public let kScreenHeight: CGFloat = UIScreen.main.bounds.size.height
 public let kScreenScale: CGFloat = UIScreen.main.scale
+public let kEmptyBottomHeight: CGFloat = kPhoneXSeries ? 34.0 : 0
 
 public var kPhoneXSeries: Bool {
     if #available(iOS 11.0, *) {
@@ -33,9 +34,10 @@ public var kStatusBarHeight: CGFloat {
     return statusBarH
 }
 
-public var kEmptyBottomHeight: CGFloat {
-    return kPhoneXSeries ? 34.0 : 0
-}
+//public var kEmptyBottomHeight: CGFloat {
+//    return kPhoneXSeries ? 34.0 : 0
+//}
+
 
 public var kTabbarHeight: CGFloat {
     return kPhoneXSeries ? 83.0 : 49.0
