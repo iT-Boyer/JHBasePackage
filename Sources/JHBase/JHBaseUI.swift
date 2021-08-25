@@ -12,13 +12,15 @@ public let kScreenWidth: CGFloat = UIScreen.main.bounds.size.width
 public let kScreenHeight: CGFloat = UIScreen.main.bounds.size.height
 public let kScreenScale: CGFloat = UIScreen.main.scale
 public let kEmptyBottomHeight: CGFloat = kPhoneXSeries ? 34.0 : 0
+public let kTabbarHeight: CGFloat = kPhoneXSeries ? 83.0 : 49.0
+public let kNaviBarHeight: CGFloat = 44.0
+public let kNaviBarMaxY: CGFloat = kNaviBarHeight + kStatusBarHeight
 
 public var kPhoneXSeries: Bool {
     if #available(iOS 11.0, *) {
-        guard let appDelegate = UIApplication.shared.delegate else { return false }
-        guard let appWindow = appDelegate.window else { return false }
-        let safeBottom: CGFloat = appWindow?.safeAreaInsets.bottom ?? 0
-        return (safeBottom > 0)
+        guard let keyWin: UIWindow? = UIApplication.shared.delegate?.window else { return false }
+        guard let safeBtm: CGFloat = keyWin?.safeAreaInsets.bottom else { return false }
+        return (safeBtm > 0)
     }
     return false
 }
@@ -32,21 +34,4 @@ public var kStatusBarHeight: CGFloat {
         statusBarH = UIApplication.shared.statusBarFrame.size.height
     }
     return statusBarH
-}
-
-//public var kEmptyBottomHeight: CGFloat {
-//    return kPhoneXSeries ? 34.0 : 0
-//}
-
-
-public var kTabbarHeight: CGFloat {
-    return kPhoneXSeries ? 83.0 : 49.0
-}
-
-public var kNaviBarHeight: CGFloat {
-    return 44.0
-}
-
-public var kNaviBarMaxY: CGFloat {
-    return kNaviBarHeight + kStatusBarHeight;
 }
