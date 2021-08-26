@@ -18,7 +18,10 @@ let package = Package(
     targets: [
         .target(
             name: "JHBase",
-            dependencies: []),
+            dependencies: [],
+            resources: [
+                .process("images"),
+            ]),
         .testTarget(
             name: "JHBaseTests",
             dependencies: ["JHBase"]),
