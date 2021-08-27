@@ -10,6 +10,8 @@ import UIKit
 // MARK: - JHBaseNavVC
 
 open class JHBaseNavVC: UIViewController {
+    typealias RefreshClosure = () -> Void
+    var refreshClosure: RefreshClosure?
     
     open var navTitle: String? {
         didSet {
@@ -46,7 +48,7 @@ open class JHBaseNavVC: UIViewController {
     
     // MARK: - Actions
     
-    @objc open func backBtnClicked(_ backBtn: UIButton) -> Void {
+    @objc open func backBtnClicked(_ btn: UIButton) -> Void {
         guard let navi = self.navigationController else {
             self.dismiss(animated: false, completion: nil)
             return
@@ -58,12 +60,53 @@ open class JHBaseNavVC: UIViewController {
         }
     }
     
+    @objc func refreshBtnClicked(_ btn: UIButton) -> Void {
+        guard let refreshBlock = self.refreshClosure else { return }
+        refreshBlock()
+    }
+    
+    // MARK: - API
+    
+    func showNoDataView() -> Void {
+        self.emptyView.refreshBtn.isHidden = true
+        #if SWIFT_PACKAGE
+        let imgPath = String(format: "%@/nodata_green", Bundle.module.bundlePath)
+        self.emptyView.imgView.image = UIImage.init(named: imgPath)
+        #endif
+        if self.view.subviews.contains(self.emptyView) {
+            self.view.bringSubviewToFront(self.emptyView)
+        } else {
+            self.view.addSubview(self.emptyView)
+        }
+        self.emptyView.setNeedsLayout()
+    }
+    
+    func showNoInternet() -> Void {
+        self.emptyView.refreshBtn.isHidden = false
+        #if SWIFT_PACKAGE
+        let imgPath = String(format: "%@/nodata_blue", Bundle.module.bundlePath)
+        self.emptyView.imgView.image = UIImage.init(named: imgPath)
+        #endif
+        if self.view.subviews.contains(self.emptyView) {
+            self.view.bringSubviewToFront(self.emptyView)
+        } else {
+            self.view.addSubview(self.emptyView)
+        }
+        self.emptyView.setNeedsLayout()
+    }
+    
     // MARK: - Lazy Load
     
     lazy public var navBar: JHBaseNavBar = {
-        let navBar = JHBaseNavBar.init(frame: .zero)
-        navBar.backBtn.addTarget(self, action: #selector(backBtnClicked(_:)), for: .touchUpInside)
-        return navBar
+        let tmpView = JHBaseNavBar.init(frame: .zero)
+        tmpView.backBtn.addTarget(self, action: #selector(backBtnClicked(_:)), for: .touchUpInside)
+        return tmpView
+    }()
+    
+    lazy public var emptyView: JHBaseEmptyView = {
+        let tmpView = JHBaseEmptyView.init(frame: .zero)
+        tmpView.refreshBtn.addTarget(self, action: #selector(refreshBtnClicked(_:)), for: .touchUpInside)
+        return tmpView
     }()
 
 }
@@ -137,8 +180,9 @@ open class JHBaseEmptyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(self.titleLabel)
         self.addSubview(self.imgView)
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.refreshBtn)
     }
     
     required public init?(coder: NSCoder) {
@@ -147,12 +191,24 @@ open class JHBaseEmptyView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        let imgX = (kScreenWidth - 130) * 0.5
-        let imgY = (kScreenHeight - 76 - 44) * 0.5
-        self.imgView.frame = .init(x: imgX, y: imgY, width: 130, height: 76)
         
-        let titleLabelY = self.imgView.frame.maxY + 24
-        self.titleLabel.frame = .init(x: 0, y: titleLabelY, width: kScreenWidth, height: 20)
+        self.imgView.sizeToFit()
+        let imgW = self.imgView.bounds.size.width
+        let imgH = self.imgView.bounds.size.height
+        
+        let titleW = kScreenWidth - 24
+        let titleH = self.titleLabel.sizeThatFits(.init(width: titleW, height: kScreenHeight)).height
+        
+        let imgX = (kScreenWidth - imgW) * 0.5
+        let imgY = (kScreenHeight - imgH - 20 - titleH - 10 - 30) * 0.5
+        self.imgView.frame = .init(x: imgX, y: imgY, width: imgW, height: imgH)
+        
+        let titleLabelY = self.imgView.frame.maxY + 20
+        self.titleLabel.frame = .init(x: 0, y: titleLabelY, width: titleW, height: titleH)
+        
+        let btnX = (kScreenWidth - 90) * 0.5
+        let btnY = self.titleLabel.frame.maxY + 10
+        self.refreshBtn.frame = .init(x: btnX, y: btnY, width: 90, height: 30)
     }
     
     // MARK: - Lazy Load
@@ -162,6 +218,7 @@ open class JHBaseEmptyView: UIView {
         tmpLabel.font = .kFont14
         tmpLabel.textAlignment = .center
         tmpLabel.textColor = .k999999
+        tmpLabel.numberOfLines = 0
         return tmpLabel
     }()
     
@@ -172,5 +229,17 @@ open class JHBaseEmptyView: UIView {
         tmpView.image = UIImage.init(named: imgPath)
         #endif
         return tmpView
+    }()
+    
+    lazy public var refreshBtn: UIButton = {
+        let tmpBtn = UIButton.init(type: .custom)
+        tmpBtn.isHidden = true
+        #if SWIFT_PACKAGE
+        let normalPath = String(format: "%@/refresh_text_normal", Bundle.module.bundlePath)
+        let highlightPath = String(format: "%@/refresh_text_highlight", Bundle.module.bundlePath)
+        tmpBtn.setImage(UIImage.init(named: normalPath), for: .normal)
+        tmpBtn.setImage(UIImage.init(named: highlightPath), for: .highlighted)
+        #endif
+        return tmpBtn
     }()
 }
