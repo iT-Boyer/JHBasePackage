@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4EB67E1926D64DF000A30EA4 /* JHBaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92D22426CE1F15005F0742 /* JHBaseColor.swift */; };
+		9C20B9E426D72BD4000B15AA /* JHBaseNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20B9E326D72BD4000B15AA /* JHBaseNavVC.swift */; };
+		9C20B9E526D72BD4000B15AA /* JHBaseNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20B9E326D72BD4000B15AA /* JHBaseNavVC.swift */; };
 		9C92D22726CE1F15005F0742 /* JHBaseUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92D22526CE1F15005F0742 /* JHBaseUI.swift */; };
 		9CE5E54C26CD29BF00F2E990 /* JHBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE5E54A26CD29BF00F2E990 /* JHBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEC8A4626D634F000089960 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CEC8A4526D634F000089960 /* AppDelegate.m */; };
@@ -22,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C20B9E326D72BD4000B15AA /* JHBaseNavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHBaseNavVC.swift; sourceTree = "<group>"; };
 		9C92D22426CE1F15005F0742 /* JHBaseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHBaseColor.swift; sourceTree = "<group>"; };
 		9C92D22526CE1F15005F0742 /* JHBaseUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHBaseUI.swift; sourceTree = "<group>"; };
 		9CE5E54726CD29BF00F2E990 /* JHBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JHBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +78,7 @@
 			children = (
 				9C92D22426CE1F15005F0742 /* JHBaseColor.swift */,
 				9C92D22526CE1F15005F0742 /* JHBaseUI.swift */,
+				9C20B9E326D72BD4000B15AA /* JHBaseNavVC.swift */,
 			);
 			path = JHBase;
 			sourceTree = "<group>";
@@ -251,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EB67E1926D64DF000A30EA4 /* JHBaseColor.swift in Sources */,
+				9C20B9E426D72BD4000B15AA /* JHBaseNavVC.swift in Sources */,
 				9C92D22726CE1F15005F0742 /* JHBaseUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +268,7 @@
 				9CEC8A4626D634F000089960 /* AppDelegate.m in Sources */,
 				9CEC8A5726D634F100089960 /* main.m in Sources */,
 				9CEC8A5E26D639AB00089960 /* MainModel.swift in Sources */,
+				9C20B9E526D72BD4000B15AA /* JHBaseNavVC.swift in Sources */,
 				9CEC8A5F26D639EC00089960 /* JHBaseUI.swift in Sources */,
 				9CEC8A6326D63CB900089960 /* JHBaseColor.swift in Sources */,
 			);
