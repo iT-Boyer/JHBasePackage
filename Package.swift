@@ -20,7 +20,7 @@ let package = Package(
             name: "JHBase",
             dependencies: [],
             resources: [
-                .process("images"),
+                .process("Resources"),
             ]),
         .testTarget(
             name: "JHBaseTests",

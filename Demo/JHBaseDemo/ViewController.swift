@@ -1,16 +1,27 @@
 //
-//  MainModel.swift
+//  ViewController.swift
 //  JHBaseDemo
 //
-//  Created by lifei on 2021/8/25.
+//  Created by lifei on 2021/8/27.
 //
 
 import UIKit
-//import JHBase
+import JHBase
 
-class MainModel: NSObject {
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .lightGray
+    }
     
-    @objc public func test() -> Void {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.backgroundColor = .randomColor()
+        self.test()
+    }
+    
+    public func test() -> Void {
         print("kScreenBounds:\(kScreenBounds)")
         print("kScreenWidth:\(kScreenWidth)")
         print("kScreenHeight:\(kScreenHeight)")
@@ -23,3 +34,4 @@ class MainModel: NSObject {
     }
 
 }
+
