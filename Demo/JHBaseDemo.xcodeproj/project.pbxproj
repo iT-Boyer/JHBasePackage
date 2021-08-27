@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9C30DC6B26D8861200B6D3D0 /* JHBasePackage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JHBasePackage; path = ..; sourceTree = "<group>"; };
+		4EB67E2826D8877400A30EA4 /* JHBasePackage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JHBasePackage; path = ..; sourceTree = "<group>"; };
 		9C7F9E3626D8831D000642AD /* JHBaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JHBaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7F9E3926D8831D000642AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C7F9E3D26D8831D000642AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		9C7F9E2D26D8831D000642AD = {
 			isa = PBXGroup;
 			children = (
-				9C30DC6B26D8861200B6D3D0 /* JHBasePackage */,
+				4EB67E2826D8877400A30EA4 /* JHBasePackage */,
 				9C7F9E3826D8831D000642AD /* JHBaseDemo */,
 				9C7F9E3726D8831D000642AD /* Products */,
 				9C30DC6C26D8864500B6D3D0 /* Frameworks */,
