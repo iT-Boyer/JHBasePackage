@@ -7,14 +7,15 @@
 
 import UIKit
 
-public let kScreenBounds: CGRect = UIScreen.main.bounds
-public let kScreenWidth: CGFloat = UIScreen.main.bounds.size.width
+public let kScreenBounds: CGRect  = UIScreen.main.bounds
+public let kScreenWidth: CGFloat  = UIScreen.main.bounds.size.width
 public let kScreenHeight: CGFloat = UIScreen.main.bounds.size.height
-public let kScreenScale: CGFloat = UIScreen.main.scale
+public let kScreenScale: CGFloat  = UIScreen.main.scale
+
 public let kEmptyBottomHeight: CGFloat = kPhoneXSeries ? 34.0 : 0
-public let kTabbarHeight: CGFloat = kPhoneXSeries ? 83.0 : 49.0
-public let kNaviBarHeight: CGFloat = 44.0
-public let kNaviBarMaxY: CGFloat = kNaviBarHeight + kStatusBarHeight
+public let kTabbarHeight: CGFloat      = kPhoneXSeries ? 83.0 : 49.0
+public let kNaviBarHeight: CGFloat     = 44.0
+public let kNaviBarMaxY: CGFloat       = kNaviBarHeight + kStatusBarHeight
 
 public var kPhoneXSeries: Bool {
     if #available(iOS 11.0, *) {
