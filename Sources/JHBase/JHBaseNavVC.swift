@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - JHBaseNavVC
+
 open class JHBaseNavVC: UIViewController {
     
     open var navTitle: String? {
@@ -18,6 +20,7 @@ open class JHBaseNavVC: UIViewController {
     }
     
     // MARK: - Init
+    
     public init(title: String) {
         self.navTitle = title
         super.init(nibName: nil, bundle: nil)
@@ -28,6 +31,7 @@ open class JHBaseNavVC: UIViewController {
     }
     
     // MARK: - Life
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .kF5F5F5
@@ -41,6 +45,7 @@ open class JHBaseNavVC: UIViewController {
     }
     
     // MARK: - Actions
+    
     @objc open func backBtnClicked(_ backBtn: UIButton) -> Void {
         guard let navi = self.navigationController else {
             self.dismiss(animated: false, completion: nil)
@@ -54,6 +59,7 @@ open class JHBaseNavVC: UIViewController {
     }
     
     // MARK: - Lazy Load
+    
     lazy public var navBar: JHBaseNavBar = {
         let navBar = JHBaseNavBar.init(frame: .zero)
         navBar.backBtn.addTarget(self, action: #selector(backBtnClicked(_:)), for: .touchUpInside)
@@ -61,6 +67,8 @@ open class JHBaseNavVC: UIViewController {
     }()
 
 }
+
+// MARK: - JHBaseNavBar
 
 open class JHBaseNavBar: UIView {
     
@@ -99,7 +107,8 @@ open class JHBaseNavBar: UIView {
     // MARK: - Lazy Load
     lazy public var titleLabel: UILabel = {
         let tmpLabel = UILabel.init(frame: .zero)
-        tmpLabel.font = .boldSystemFont(ofSize: 18)
+        tmpLabel.font = .kBoldFont18
+        tmpLabel.textColor = .k333333
         tmpLabel.textAlignment = .center
         return tmpLabel
     }()
@@ -107,17 +116,61 @@ open class JHBaseNavBar: UIView {
     lazy public var backBtn: UIButton = {
         let tmpBtn = UIButton.init(type: .custom)
         #if SWIFT_PACKAGE
-        if let imgPath = Bundle.module.path(forResource: "arrow_left_dark@2x", ofType: "png") {
-            let btnImg = UIImage.init(named: imgPath)
-            tmpBtn.setImage(btnImg, for: .normal)
-        }
+        let imgPath = String(format: "%@/arrow_left_dark", Bundle.module.bundlePath)
+        tmpBtn.setImage(UIImage.init(named: imgPath), for: .normal)
         #endif
         return tmpBtn
     }()
     
     lazy public var lineView: UIView = {
         let tmpView = UIView.init(frame: .zero)
-        tmpView.backgroundColor = .initWithHex("#F7F7F7")
+        tmpView.backgroundColor = .kF7F7F7
+        return tmpView
+    }()
+}
+
+// MARK: - JHBaseEmptyView
+
+open class JHBaseEmptyView: UIView {
+
+    // MARK: - Init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.imgView)
+    }
+    
+    required public init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        let imgX = (kScreenWidth - 130) * 0.5
+        let imgY = (kScreenHeight - 76 - 44) * 0.5
+        self.imgView.frame = .init(x: imgX, y: imgY, width: 130, height: 76)
+        
+        let titleLabelY = self.imgView.frame.maxY + 24
+        self.titleLabel.frame = .init(x: 0, y: titleLabelY, width: kScreenWidth, height: 20)
+    }
+    
+    // MARK: - Lazy Load
+    
+    lazy public var titleLabel: UILabel = {
+        let tmpLabel = UILabel.init(frame: .zero)
+        tmpLabel.font = .kFont14
+        tmpLabel.textAlignment = .center
+        tmpLabel.textColor = .k999999
+        return tmpLabel
+    }()
+    
+    lazy public var imgView: UIImageView = {
+        let tmpView = UIImageView.init(frame: .zero)
+        #if SWIFT_PACKAGE
+        let imgPath = String(format: "%@/nodata_green", Bundle.module.bundlePath)
+        tmpView.image = UIImage.init(named: imgPath)
+        #endif
         return tmpView
     }()
 }

@@ -112,6 +112,7 @@ import UIKit
     public static let k414755: UIColor = UIColor.initWithHex("414755")
     public static let k5E637B: UIColor = UIColor.initWithHex("5E637B")
     public static let kFCFCFC: UIColor = UIColor.initWithHex("FCFCFC")
+    public static let kF7F7F7: UIColor = UIColor.initWithHex("F7F7F7")
     
 }
 
