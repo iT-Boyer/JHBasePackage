@@ -13,7 +13,7 @@ import Foundation
         if type(of: self).isEqual(NSNull.self) {
             return true
         }
-        if self.trimmingCharacters(in: NSCharacterSet.whitespaces).count == 0 {
+        if self.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
             return true
         }
         if self.isEqual(to: "(null)") {
@@ -29,7 +29,7 @@ import Foundation
         if type(of: content).isEqual(NSNull.self) {
             return true
         }
-        if content.trimmingCharacters(in: NSCharacterSet.whitespaces).count == 0 {
+        if content.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
             return true
         }
         if content.isEqual(to: "(null)") {

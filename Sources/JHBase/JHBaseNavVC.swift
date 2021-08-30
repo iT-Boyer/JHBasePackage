@@ -11,11 +11,11 @@ import SnapKit
 // MARK: - JHBaseNavVC
 
 open class JHBaseNavVC: UIViewController {
-    internal var refreshClosure: (() -> Void)?
+    private var refreshClosure: (() -> Void)?
     
-    open var navTitle: String? {
+    public var navTitle: String? {
         didSet {
-            if let tmpTitle = navTitle, tmpTitle.count > 0 {
+            if let tmpTitle = navTitle, tmpTitle.isEmpty == false {
                 navBar.titleLabel.text = tmpTitle
             }
         }
@@ -60,32 +60,36 @@ open class JHBaseNavVC: UIViewController {
         }
     }
     
-    @objc func refreshBtnClicked(_ btn: UIButton) -> Void {
+    @objc open func refreshBtnClicked(_ btn: UIButton) -> Void {
         guard let refreshBlock = refreshClosure else { return }
         refreshBlock()
     }
     
     // MARK: - API
     @discardableResult
-    open func showNoDataView() -> Self {
+    public func showNoDataView() -> Self {
         return showNoDataView(in: self.view)
     }
     
     @discardableResult
-    open func showNoDataView(in superView: UIView?) -> Self {
+    public func showNoDataView(in superView: UIView?) -> Self {
         emptyView.refreshBtn.isHidden = true
         return showEmptyView(in: superView, imgName: "nodata_green")
     }
     
     @discardableResult
-    open func showNoInternet() -> Self {
+    public func showNoInternet() -> Self {
         return showNoInternet(in: self.view)
     }
     
     @discardableResult
-    open func showNoInternet(in superView: UIView?) -> Self {
+    public func showNoInternet(in superView: UIView?) -> Self {
         emptyView.refreshBtn.isHidden = false
         return showEmptyView(in: superView, imgName: "nodata_blue")
+    }
+    
+    public func refresh(_ closure: (() -> Void)?) -> Void {
+        refreshClosure = closure
     }
     
     func showEmptyView(in superView: UIView?, imgName: String) -> Self {
@@ -111,10 +115,6 @@ open class JHBaseNavVC: UIViewController {
         return self
     }
     
-    open func refresh(_ closure: (() -> Void)?) -> Void {
-        refreshClosure = closure
-    }
-    
     // MARK: - Lazy Load
     
     lazy public var navBar: JHBaseNavBar = {
@@ -137,7 +137,7 @@ public class JHBaseNavBar: UIView {
     
     public var navTitle: String? {
         didSet {
-            if let tmpTitle = navTitle, tmpTitle.count > 0 {
+            if let tmpTitle = navTitle, tmpTitle.isEmpty == false {
                 titleLabel.text = tmpTitle
             }
         }
