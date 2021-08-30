@@ -6,17 +6,17 @@
 //
 
 import UIKit
+import SnapKit
 
 // MARK: - JHBaseNavVC
 
 open class JHBaseNavVC: UIViewController {
-    typealias RefreshClosure = () -> Void
-    var refreshClosure: RefreshClosure?
+    internal var refreshClosure: (() -> Void)?
     
     open var navTitle: String? {
         didSet {
             if let tmpTitle = navTitle, tmpTitle.count > 0 {
-                self.navBar.titleLabel.text = tmpTitle
+                navBar.titleLabel.text = tmpTitle
             }
         }
     }
@@ -24,7 +24,7 @@ open class JHBaseNavVC: UIViewController {
     // MARK: - Init
     
     public init(title: String) {
-        self.navTitle = title
+        navTitle = title
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,8 +37,8 @@ open class JHBaseNavVC: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .kF5F5F5
-        self.view.addSubview(self.navBar)
-        self.navBar.frame = .init(x: 0, y: 0, width: kScreenWidth, height: kNaviBarMaxY)
+        self.view.addSubview(navBar)
+        navBar.frame = .init(x: 0, y: 0, width: kScreenWidth, height: kNaviBarMaxY)
     }
     
     open override func viewWillAppear(_ animated: Bool) {
@@ -61,38 +61,58 @@ open class JHBaseNavVC: UIViewController {
     }
     
     @objc func refreshBtnClicked(_ btn: UIButton) -> Void {
-        guard let refreshBlock = self.refreshClosure else { return }
+        guard let refreshBlock = refreshClosure else { return }
         refreshBlock()
     }
     
     // MARK: - API
-    
-    func showNoDataView() -> Void {
-        self.emptyView.refreshBtn.isHidden = true
-        #if SWIFT_PACKAGE
-        let imgPath = String(format: "%@/nodata_green", Bundle.module.bundlePath)
-        self.emptyView.imgView.image = UIImage.init(named: imgPath)
-        #endif
-        if self.view.subviews.contains(self.emptyView) {
-            self.view.bringSubviewToFront(self.emptyView)
-        } else {
-            self.view.addSubview(self.emptyView)
-        }
-        self.emptyView.setNeedsLayout()
+    @discardableResult
+    open func showNoDataView() -> Self {
+        return showNoDataView(in: self.view)
     }
     
-    func showNoInternet() -> Void {
-        self.emptyView.refreshBtn.isHidden = false
+    @discardableResult
+    open func showNoDataView(in superView: UIView?) -> Self {
+        emptyView.refreshBtn.isHidden = true
+        return showEmptyView(in: superView, imgName: "nodata_green")
+    }
+    
+    @discardableResult
+    open func showNoInternet() -> Self {
+        return showNoInternet(in: self.view)
+    }
+    
+    @discardableResult
+    open func showNoInternet(in superView: UIView?) -> Self {
+        emptyView.refreshBtn.isHidden = false
+        return showEmptyView(in: superView, imgName: "nodata_blue")
+    }
+    
+    func showEmptyView(in superView: UIView?, imgName: String) -> Self {
         #if SWIFT_PACKAGE
-        let imgPath = String(format: "%@/nodata_blue", Bundle.module.bundlePath)
-        self.emptyView.imgView.image = UIImage.init(named: imgPath)
+        let imgPath = String(format: "%@/\(imgName)", Bundle.module.bundlePath)
+        emptyView.imgView.image = UIImage.init(named: imgPath)
         #endif
-        if self.view.subviews.contains(self.emptyView) {
-            self.view.bringSubviewToFront(self.emptyView)
-        } else {
-            self.view.addSubview(self.emptyView)
+        
+        var tmpView: UIView = self.view
+        if let superView = superView {
+            tmpView = superView
         }
-        self.emptyView.setNeedsLayout()
+        if tmpView.subviews.contains(emptyView) {
+            tmpView.bringSubviewToFront(emptyView)
+        } else {
+            tmpView.addSubview(emptyView)
+        }
+        emptyView.frame = tmpView.bounds
+        // 不遮挡导航栏
+        if tmpView.subviews.contains(navBar) {
+            tmpView.bringSubviewToFront(navBar)
+        }
+        return self
+    }
+    
+    open func refresh(_ closure: (() -> Void)?) -> Void {
+        refreshClosure = closure
     }
     
     // MARK: - Lazy Load
@@ -108,17 +128,17 @@ open class JHBaseNavVC: UIViewController {
         tmpView.refreshBtn.addTarget(self, action: #selector(refreshBtnClicked(_:)), for: .touchUpInside)
         return tmpView
     }()
-
+    
 }
 
 // MARK: - JHBaseNavBar
 
-open class JHBaseNavBar: UIView {
+public class JHBaseNavBar: UIView {
     
-    open var navTitle: String? {
+    public var navTitle: String? {
         didSet {
             if let tmpTitle = navTitle, tmpTitle.count > 0 {
-                self.titleLabel.text = tmpTitle
+                titleLabel.text = tmpTitle
             }
         }
     }
@@ -127,24 +147,37 @@ open class JHBaseNavBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .kFCFCFC
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.backBtn)
-        self.addSubview(self.lineView)
-    }
-    
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        let titleLabelW = kScreenWidth - 120
-        self.titleLabel.frame = .init(x: 60, y: kStatusBarHeight, width: titleLabelW, height: kNaviBarHeight)
-        self.backBtn.frame = .init(x: 0, y: kStatusBarHeight, width: 60, height: 44)
+        self.addSubview(titleLabel)
+        self.addSubview(backBtn)
+        self.addSubview(lineView)
         
-        let lineY = self.frame.size.height - 1
-        let lineW = self.frame.size.width
-        self.lineView.frame = .init(x: 0, y: lineY, width: lineW, height: 1)
+        setupFrame()
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func setupFrame() -> Void {
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview().inset(60)
+            make.top.equalTo(kStatusBarHeight)
+            make.height.equalTo(kNaviBarHeight)
+        }
+        
+        backBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(0)
+            make.top.equalTo(kStatusBarHeight)
+            make.width.equalTo(60)
+            make.height.equalTo(44)
+        }
+        
+        lineView.snp.makeConstraints { (make) in
+            make.left.equalTo(0)
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(1)
+        }
     }
     
     // MARK: - Lazy Load
@@ -174,47 +207,55 @@ open class JHBaseNavBar: UIView {
 
 // MARK: - JHBaseEmptyView
 
-open class JHBaseEmptyView: UIView {
-
+public class JHBaseEmptyView: UIView {
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(self.imgView)
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.refreshBtn)
+        let container: UIView = UIView()
+        self.addSubview(container)
+        container.addSubview(imgView)
+        container.addSubview(titleLabel)
+        container.addSubview(refreshBtn)
+        
+        setupFrame(container: container)
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    open override func layoutSubviews() {
-        super.layoutSubviews()
+    func setupFrame(container: UIView) -> Void {
+        container.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview()
+        }
         
-        self.imgView.sizeToFit()
-        let imgW = self.imgView.bounds.size.width
-        let imgH = self.imgView.bounds.size.height
+        imgView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview().offset(8)
+        }
         
-        let titleW = kScreenWidth - 24
-        let titleH = self.titleLabel.sizeThatFits(.init(width: titleW, height: kScreenHeight)).height
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(imgView.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(12)
+        }
         
-        let imgX = (kScreenWidth - imgW) * 0.5
-        let imgY = (kScreenHeight - imgH - 20 - titleH - 10 - 30) * 0.5
-        self.imgView.frame = .init(x: imgX, y: imgY, width: imgW, height: imgH)
-        
-        let titleLabelY = self.imgView.frame.maxY + 20
-        self.titleLabel.frame = .init(x: 0, y: titleLabelY, width: titleW, height: titleH)
-        
-        let btnX = (kScreenWidth - 90) * 0.5
-        let btnY = self.titleLabel.frame.maxY + 10
-        self.refreshBtn.frame = .init(x: btnX, y: btnY, width: 90, height: 30)
+        refreshBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(90)
+            make.height.equalTo(30)
+            make.bottom.equalToSuperview()
+        }
     }
     
     // MARK: - Lazy Load
     
     lazy public var titleLabel: UILabel = {
         let tmpLabel = UILabel.init(frame: .zero)
+        tmpLabel.text = "暂无数据"
         tmpLabel.font = .kFont14
         tmpLabel.textAlignment = .center
         tmpLabel.textColor = .k999999

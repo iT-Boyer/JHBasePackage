@@ -12,13 +12,14 @@ let package = Package(
             targets: ["JHBase"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(name: "JHThird", url: "http://192.168.9.190/publicplugingoup/JHThirdPackage.git", .branch("master"))
     ],
     targets: [
         .target(
             name: "JHBase",
-            dependencies: [],
+            dependencies: [
+                .product(name: "SnapKit", package: "JHThird")
+            ],
             resources: [
                 .process("Resources"),
             ]),
