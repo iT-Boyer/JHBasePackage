@@ -1,5 +1,9 @@
 # JHBase
 
+[GitLab 仓库地址](http://192.168.9.190/publicplugingoup/JHBasePackage.git)
+
+## 简介
+
 Swift 基础库，包含：
 
 * UI 适配全局常量
