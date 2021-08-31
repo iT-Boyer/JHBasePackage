@@ -9,8 +9,8 @@ import Foundation
 
 @objc extension NSString{
     
-    func isEmpty() -> Bool {
-        if type(of: self).isEqual(NSNull.self) {
+    public func isEmptyOrNull() -> Bool {
+        if self is NSNull {
             return true
         }
         if self.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
@@ -25,8 +25,8 @@ import Foundation
         return false
     }
     
-    static func contentIsNullORNil(content:NSString) -> Bool{
-        if type(of: content).isEqual(NSNull.self) {
+    public static func isEmptyOrNull(_ content: NSString) -> Bool{
+        if content is NSNull {
             return true
         }
         if content.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
