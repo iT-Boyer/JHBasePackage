@@ -3,7 +3,7 @@
 //  JHBase
 //
 //  Created by lifei on 2021/8/26.
-//
+//  UIViewController 基类
 
 import UIKit
 import SnapKit
@@ -234,7 +234,7 @@ public class JHBaseEmptyView: UIView {
         
         imgView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
-            make.centerX.equalToSuperview().offset(8)
+            make.centerX.equalToSuperview().offset(5)
         }
         
         titleLabel.snp.makeConstraints { (make) in

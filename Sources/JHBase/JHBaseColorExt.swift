@@ -3,7 +3,7 @@
 //  PCSwiftUI
 //
 //  Created by lifei on 2021/2/19.
-//  Color扩展-16进制颜色
+//  16进制颜色常量及便利方法
 
 import UIKit
 
@@ -113,7 +113,63 @@ import UIKit
     public static let k5E637B: UIColor = UIColor.initWithHex("5E637B")
     public static let kFCFCFC: UIColor = UIColor.initWithHex("FCFCFC")
     public static let kF7F7F7: UIColor = UIColor.initWithHex("F7F7F7")
-    
+    public static let kDEE0E3: UIColor = UIColor.initWithHex("DEE0E3")
+    public static let kFF9A1C: UIColor = UIColor.initWithHex("FF9A1C")
+    public static let k04A174: UIColor = UIColor.initWithHex("04A174")
+    public static let k686868: UIColor = UIColor.initWithHex("686868")
+    public static let kFA5555: UIColor = UIColor.initWithHex("FA5555")
+    public static let k0C0F20: UIColor = UIColor.initWithHex("0C0F20")
+    public static let kFBEBDB: UIColor = UIColor.initWithHex("FBEBDB")
+    public static let k27282B: UIColor = UIColor.initWithHex("27282B")
+    public static let k353638: UIColor = UIColor.initWithHex("353638")
+    public static let k777777: UIColor = UIColor.initWithHex("777777")
+    public static let kFF6934: UIColor = UIColor.initWithHex("FF6934")
+    public static let kFABC00: UIColor = UIColor.initWithHex("FABC00")
+    public static let kECECED: UIColor = UIColor.initWithHex("ECECED")
+    public static let kB0B9D2: UIColor = UIColor.initWithHex("B0B9D2")
+    public static let kFFE9F2: UIColor = UIColor.initWithHex("FFE9F2")
+    public static let kFF9F23: UIColor = UIColor.initWithHex("FF9F23")
+    public static let kFFEEA4: UIColor = UIColor.initWithHex("FFEEA4")
+    public static let kF4433F: UIColor = UIColor.initWithHex("F4433F")
+    public static let kFF6B34: UIColor = UIColor.initWithHex("FF6B34")
+    public static let k2CD773: UIColor = UIColor.initWithHex("2CD773")
+    public static let kE04337: UIColor = UIColor.initWithHex("E04337")
+    public static let kC4C8D4: UIColor = UIColor.initWithHex("C4C8D4")
+    public static let k3FDA7F: UIColor = UIColor.initWithHex("3FDA7F")
+    public static let kFFD68F: UIColor = UIColor.initWithHex("FFD68F")
+    public static let kCECECE: UIColor = UIColor.initWithHex("CECECE")
+    public static let kB5B5B5: UIColor = UIColor.initWithHex("B5B5B5")
+    public static let k060710: UIColor = UIColor.initWithHex("060710")
+    public static let kEFEFEF: UIColor = UIColor.initWithHex("EFEFEF")
+    public static let k6E738C: UIColor = UIColor.initWithHex("6E738C")
+    public static let k146FD1: UIColor = UIColor.initWithHex("146FD1")
+    public static let kDBDBDB: UIColor = UIColor.initWithHex("DBDBDB")
+    public static let kFCEAEC: UIColor = UIColor.initWithHex("FCEAEC")
+    public static let kDE354B: UIColor = UIColor.initWithHex("DE354B")
+    public static let kDDDDDD: UIColor = UIColor.initWithHex("DDDDDD")
+    public static let kFF6933: UIColor = UIColor.initWithHex("FF6933")
+    public static let kFF6531: UIColor = UIColor.initWithHex("FF6531")
+    public static let kABAAAA: UIColor = UIColor.initWithHex("ABAAAA")
+    public static let kFEF5CC: UIColor = UIColor.initWithHex("FEF5CC")
+    public static let kF0F0F0: UIColor = UIColor.initWithHex("F0F0F0")
+    public static let kECCAA0: UIColor = UIColor.initWithHex("ECCAA0")
+    public static let kFFE0D6: UIColor = UIColor.initWithHex("FFE0D6")
+    public static let kFEF4F1: UIColor = UIColor.initWithHex("FEF4F1")
+    public static let kFE8D08: UIColor = UIColor.initWithHex("FE8D08")
+    public static let kFFF3CC: UIColor = UIColor.initWithHex("FFF3CC")
+    public static let kCFCFCF: UIColor = UIColor.initWithHex("CFCFCF")
+    public static let k136FD0: UIColor = UIColor.initWithHex("136FD0")
+    public static let k9B9B9B: UIColor = UIColor.initWithHex("9B9B9B")
+    public static let kFF6A34: UIColor = UIColor.initWithHex("FF6A34")
+    public static let k111A39: UIColor = UIColor.initWithHex("111A39")
+    public static let kF90A06: UIColor = UIColor.initWithHex("F90A06")
+    public static let kFF6631: UIColor = UIColor.initWithHex("FF6631")
+    public static let kFEB332: UIColor = UIColor.initWithHex("FEB332")
+    public static let kF96813: UIColor = UIColor.initWithHex("F96813")
+    public static let kE5F5F1: UIColor = UIColor.initWithHex("E5F5F1")
+    public static let k6B6B79: UIColor = UIColor.initWithHex("6B6B79")
+    public static let k707070: UIColor = UIColor.initWithHex("707070")
+    public static let kA0A0A0: UIColor = UIColor.initWithHex("A0A0A0")
 }
 
 // MARK: - Hex to UIColor
