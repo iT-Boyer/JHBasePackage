@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - UIColor Constant
-@objc extension UIColor {
+extension UIColor {
     public static let kClear: UIColor  = UIColor.clear
     public static let k119B83: UIColor = UIColor.initWithHex("119B83")
     public static let k151515: UIColor = UIColor.initWithHex("151515")
