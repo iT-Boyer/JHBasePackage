@@ -19,6 +19,7 @@ class JHTestVC: JHBaseNavVC {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.backgroundColor = .randomColor()
         test()
+        self.showNoDataView(in: self.view)
     }
     
     public func test() -> Void {
@@ -31,6 +32,10 @@ class JHTestVC: JHBaseNavVC {
         print("kNaviBarHeight:\(kNaviBarHeight)")
         print("kStatusBarHeight:\(kStatusBarHeight)")
         print("kNaviBarMaxY:\(kNaviBarMaxY)")
+    }
+    
+    deinit {
+        print("Dealloc")
     }
 
 }

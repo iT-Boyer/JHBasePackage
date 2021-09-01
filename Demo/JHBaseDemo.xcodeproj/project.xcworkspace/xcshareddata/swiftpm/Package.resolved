@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "JHThird",
+        "repositoryURL": "http://192.168.9.190/publicplugingoup/JHThirdPackage.git",
+        "state": {
+          "branch": "master",
+          "revision": "5ef79bb977e922a2a31ca4e44c165cb01ac47b16",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

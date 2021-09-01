@@ -3,7 +3,7 @@
 //  SPLib
 //
 //  Created by lifei on 2021/8/16.
-//
+//  UI 适配全局常量
 
 import UIKit
 
