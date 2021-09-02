@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C30DC6E26D8864500B6D3D0 /* JHBase in Frameworks */ = {isa = PBXBuildFile; productRef = 9C30DC6D26D8864500B6D3D0 /* JHBase */; };
 		9C7F9E3A26D8831D000642AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7F9E3926D8831D000642AD /* AppDelegate.swift */; };
 		9C7F9E3E26D8831D000642AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7F9E3D26D8831D000642AD /* ViewController.swift */; };
 		9C7F9E4126D8831D000642AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C7F9E3F26D8831D000642AD /* Main.storyboard */; };
 		9C7F9E4326D8831E000642AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C7F9E4226D8831E000642AD /* Assets.xcassets */; };
 		9C7F9E4626D8831E000642AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C7F9E4426D8831E000642AD /* LaunchScreen.storyboard */; };
+		9C92B3B626E09E49002C8337 /* JHBase in Frameworks */ = {isa = PBXBuildFile; productRef = 9C92B3B526E09E49002C8337 /* JHBase */; };
 		9CA9FA5B26D8C70200626811 /* JHTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA9FA5A26D8C70200626811 /* JHTestVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C30DC6E26D8864500B6D3D0 /* JHBase in Frameworks */,
+				9C92B3B626E09E49002C8337 /* JHBase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +96,7 @@
 			);
 			name = JHBaseDemo;
 			packageProductDependencies = (
-				9C30DC6D26D8864500B6D3D0 /* JHBase */,
+				9C92B3B526E09E49002C8337 /* JHBase */,
 			);
 			productName = JHBaseDemo;
 			productReference = 9C7F9E3626D8831D000642AD /* JHBaseDemo.app */;
@@ -362,7 +362,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9C30DC6D26D8864500B6D3D0 /* JHBase */ = {
+		9C92B3B526E09E49002C8337 /* JHBase */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = JHBase;
 		};

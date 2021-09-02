@@ -29,3 +29,13 @@ extension String {
         return Int(self) ?? 0
     }
 }
+
+extension String {
+    public var toObject: NSObject? {
+        if self.isEmpty {
+            return nil
+        }
+        guard let cls = NSClassFromString(self).self as? NSObject.Type else { return nil }
+        return cls.init()
+    }
+}

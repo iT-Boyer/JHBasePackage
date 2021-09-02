@@ -7,9 +7,7 @@ let package = Package(
     name: "JHBase",
     platforms: [.iOS(.v11)],
     products: [
-        .library(
-            name: "JHBase",
-            targets: ["JHBase"]),
+        .library(name: "JHBase", type: .static, targets: ["JHBase"]),
     ],
     dependencies: [
         .package(name: "JHThird", url: "http://192.168.9.190/publicplugingoup/JHThirdPackage.git", .branch("master"))

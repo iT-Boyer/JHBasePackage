@@ -39,12 +39,16 @@ open class JHBaseNavVC: UIViewController {
         self.view.backgroundColor = .kF5F5F5
         self.view.addSubview(navBar)
         navBar.frame = .init(x: 0, y: 0, width: kScreenWidth, height: kNaviBarMaxY)
+        
+        configUI()
     }
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
+    
+    open func configUI() {}
     
     // MARK: - Actions
     
