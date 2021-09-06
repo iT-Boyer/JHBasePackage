@@ -23,6 +23,10 @@ open class JHBaseNavVC: UIViewController {
     
     // MARK: - Init
     
+    public init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     public init(title: String) {
         navTitle = title
         super.init(nibName: nil, bundle: nil)
