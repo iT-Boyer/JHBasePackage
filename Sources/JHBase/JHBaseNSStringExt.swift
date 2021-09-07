@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc extension NSString{
+extension NSString{
     
     public func isEmptyOrNull() -> Bool {
         if self.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
@@ -22,14 +22,15 @@ import Foundation
         return false
     }
     
-    public static func isEmptyOrNull(_ content: NSString) -> Bool{
-        if content.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
+    public static func isEmptyOrNull(_ content: String?) -> Bool{
+        guard let tmpStr = content else { return true }
+        if tmpStr.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
             return true
         }
-        if content.isEqual(to: "(null)") {
+        if tmpStr == "(null)" {
             return true
         }
-        if content.isEqual(to: "<null>") {
+        if tmpStr == "<null>" {
             return true
         }
         return false

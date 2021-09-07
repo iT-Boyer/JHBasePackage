@@ -39,3 +39,22 @@ extension String {
         return cls.init()
     }
 }
+
+extension String {
+    /// 搜索字符串中的位置
+    /// - Parameters:
+    ///   - subString: 子字符串
+    ///   - ignoreCase: 是否忽略大小写
+    /// - Returns: 子字符串的位置 NSRange
+    public func getNSRange(of subString: String, _ caseInsensitive: Bool = false) -> NSRange? {
+        if self.contains(subString) == false {
+            return nil
+        }
+        let tmpStr = self as NSString
+        var tmpRange = tmpStr.range(of: subString)
+        if caseInsensitive == true {
+            tmpRange = tmpStr.range(of: subString, options: .caseInsensitive)
+        }
+        return tmpRange
+    }
+}
