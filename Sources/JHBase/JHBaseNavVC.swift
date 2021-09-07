@@ -96,6 +96,12 @@ open class JHBaseNavVC: UIViewController {
         return showEmptyView(in: superView, imgName: "nodata_blue")
     }
     
+    @discardableResult
+    public func hideEmptyView() -> Self {
+        emptyView.removeFromSuperview()
+        return self
+    }
+    
     public func refresh(_ closure: (() -> Void)?) -> Void {
         refreshClosure = closure
     }
