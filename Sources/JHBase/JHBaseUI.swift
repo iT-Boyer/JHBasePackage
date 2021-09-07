@@ -36,3 +36,13 @@ public var kStatusBarHeight: CGFloat {
     }
     return statusBarH
 }
+
+public func kWidth(width: CGFloat) -> CGFloat{
+    let wth = (kScreenWidth/320)*(width)
+    return wth
+}
+
+public func kHeight(height: CGFloat) -> CGFloat{
+    let hgt = (kScreenWidth/320)*(height)
+    return hgt
+}
