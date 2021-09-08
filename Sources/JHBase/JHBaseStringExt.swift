@@ -30,13 +30,20 @@ extension String {
     }
 }
 
+// MARK: - String to NSObjct
 extension String {
-    public var toObject: NSObject? {
+    
+    public var toNSClass: NSObject.Type? {
         if self.isEmpty {
             return nil
         }
-        guard let cls = NSClassFromString(self).self as? NSObject.Type else { return nil }
-        return cls.init()
+        guard let objCls = NSClassFromString(self).self as? NSObject.Type else { return nil }
+        return objCls
+    }
+    
+    public var toNSObject: NSObject? {
+        guard let objCls = self.toNSClass else { return nil }
+        return objCls.init()
     }
 }
 
