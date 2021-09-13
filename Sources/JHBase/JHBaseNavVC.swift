@@ -75,25 +75,15 @@ open class JHBaseNavVC: UIViewController {
     
     // MARK: - API
     @discardableResult
-    public func showNoDataView() -> Self {
-        return showNoDataView(in: self.view)
-    }
-    
-    @discardableResult
-    public func showNoDataView(in superView: UIView?) -> Self {
+    public func showNoDataView(_ superView: UIView? = nil, imgName: String = "nodata_green") -> Self {
         emptyView.refreshBtn.isHidden = true
-        return showEmptyView(in: superView, imgName: "nodata_green")
+        return showEmptyView(in: superView, imgName: imgName)
     }
     
     @discardableResult
-    public func showNoInternet() -> Self {
-        return showNoInternet(in: self.view)
-    }
-    
-    @discardableResult
-    public func showNoInternet(in superView: UIView?) -> Self {
+    public func showNoInternet(_ superView: UIView? = nil, imgName: String = "nodata_blue") -> Self {
         emptyView.refreshBtn.isHidden = false
-        return showEmptyView(in: superView, imgName: "nodata_blue")
+        return showEmptyView(in: superView, imgName: imgName)
     }
     
     @discardableResult
@@ -109,6 +99,9 @@ open class JHBaseNavVC: UIViewController {
     func showEmptyView(in superView: UIView?, imgName: String) -> Self {
         #if SWIFT_PACKAGE
         let imgPath = String(format: "%@/\(imgName)", Bundle.module.bundlePath)
+        emptyView.imgView.image = UIImage.init(named: imgPath)
+        #else
+        let imgPath = "JHUniversalResource.bundle/\(imgName)"
         emptyView.imgView.image = UIImage.init(named: imgPath)
         #endif
         
@@ -208,6 +201,9 @@ public class JHBaseNavBar: UIView {
         #if SWIFT_PACKAGE
         let imgPath = String(format: "%@/arrow_left_dark", Bundle.module.bundlePath)
         tmpBtn.setImage(UIImage.init(named: imgPath), for: .normal)
+        #else
+        let imgPath = "JHUniversalResource.bundle/arrow_left_dark"
+        tmpBtn.setImage(UIImage.init(named: imgPath), for: .normal)
         #endif
         return tmpBtn
     }()
@@ -282,6 +278,9 @@ public class JHBaseEmptyView: UIView {
         #if SWIFT_PACKAGE
         let imgPath = String(format: "%@/nodata_green", Bundle.module.bundlePath)
         tmpView.image = UIImage.init(named: imgPath)
+        #else
+        let imgPath = "JHUniversalResource.bundle/nodata_green"
+        tmpView.image = UIImage.init(named: imgPath)
         #endif
         return tmpView
     }()
@@ -292,6 +291,11 @@ public class JHBaseEmptyView: UIView {
         #if SWIFT_PACKAGE
         let normalPath = String(format: "%@/refresh_text_normal", Bundle.module.bundlePath)
         let highlightPath = String(format: "%@/refresh_text_highlight", Bundle.module.bundlePath)
+        tmpBtn.setImage(UIImage.init(named: normalPath), for: .normal)
+        tmpBtn.setImage(UIImage.init(named: highlightPath), for: .highlighted)
+        #else
+        let normalPath = "JHUniversalResource.bundle/refresh_text_normal"
+        let highlightPath = "JHUniversalResource.bundle/refresh_text_highlight"
         tmpBtn.setImage(UIImage.init(named: normalPath), for: .normal)
         tmpBtn.setImage(UIImage.init(named: highlightPath), for: .highlighted)
         #endif
