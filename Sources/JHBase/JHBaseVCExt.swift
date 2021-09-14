@@ -9,23 +9,15 @@ import UIKit
 
 extension UIViewController {
     
-    public static var getTopMostVC: UIViewController? {
-        var rootVC = UIApplication.shared.keyWindow?.rootViewController
-        while ((rootVC?.presentationController) != nil) {
-            rootVC = rootVC?.presentedViewController
-        }
-        return rootVC
-    }
-    
-    public static var getPresentedVC: UIViewController? {
+    public static var getRootPresentedVC: UIViewController? {
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
-        if ((rootVC?.presentationController) != nil) {
+        if ((rootVC?.presentedViewController) != nil) {
             return rootVC?.presentedViewController
         }
         return rootVC
     }
     
-    public static var getRootVC: UIViewController? {
+    public static var getRootNaviTopVC: UIViewController? {
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
         if let navVC = rootVC as? UINavigationController {
             return navVC.topViewController
