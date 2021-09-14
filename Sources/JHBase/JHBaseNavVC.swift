@@ -11,7 +11,6 @@ import SnapKit
 // MARK: - JHBaseNavVC
 
 open class JHBaseNavVC: UIViewController {
-    private var refreshClosure: (() -> Void)?
     
     public var navTitle: String? {
         didSet {
@@ -68,22 +67,25 @@ open class JHBaseNavVC: UIViewController {
         }
     }
     
-    @objc open func refreshBtnClicked(_ btn: UIButton) -> Void {
-        guard let refreshBlock = refreshClosure else { return }
-        refreshBlock()
-    }
+    @objc open func refreshBtnClicked(_ btn: UIButton) {}
+    
+    @objc open func refreshImgClicked(_ btn: UIButton) {}
     
     // MARK: - API
     @discardableResult
-    public func showNoDataView(_ superView: UIView? = nil, imgName: String = "nodata_green") -> Self {
+    public func showNoDataView(_ superView: UIView? = nil, imgName: String? = nil, tipMsg: String? = nil) -> Self {
         emptyView.refreshBtn.isHidden = true
-        return showEmptyView(in: superView, imgName: imgName)
+        let imgPath: String = imgName ?? "nodata_green"
+        let tipText: String = tipMsg ?? "暂无数据"
+        return showEmptyView(in: superView, imgName: imgPath, tipMsg: tipText)
     }
     
     @discardableResult
-    public func showNoInternet(_ superView: UIView? = nil, imgName: String = "nodata_blue") -> Self {
+    public func showNoInternet(_ superView: UIView? = nil, imgName: String? = nil, tipMsg: String? = nil) -> Self {
         emptyView.refreshBtn.isHidden = false
-        return showEmptyView(in: superView, imgName: imgName)
+        let imgPath: String = imgName ?? "nodata_blue"
+        let tipText: String = tipMsg ?? "暂无数据"
+        return showEmptyView(in: superView, imgName: imgPath, tipMsg: tipText)
     }
     
     @discardableResult
@@ -92,13 +94,14 @@ open class JHBaseNavVC: UIViewController {
         return self
     }
     
-    public func refresh(_ closure: (() -> Void)?) -> Void {
-        refreshClosure = closure
-    }
-    
-    func showEmptyView(in superView: UIView?, imgName: String) -> Self {
-        let imgPath = "JHUniversalResource.bundle/\(imgName)"
-        emptyView.imgView.image = UIImage.init(named: imgPath)
+    func showEmptyView(in superView: UIView?, imgName: String, tipMsg: String) -> Self {
+        if imgName.contains(".bundle") == true {
+            emptyView.imgBtn.setImage(.init(named: imgName), for: .normal)
+        } else {
+            let imgPath = "JHUniversalResource.bundle/\(imgName)"
+            emptyView.imgBtn.setImage(.init(named: imgPath), for: .normal)
+        }
+        emptyView.titleLabel.text = tipMsg
         
         var tmpView: UIView = self.view
         if let superView = superView {
@@ -128,6 +131,7 @@ open class JHBaseNavVC: UIViewController {
     lazy public var emptyView: JHBaseEmptyView = {
         let tmpView = JHBaseEmptyView.init(frame: .zero)
         tmpView.refreshBtn.addTarget(self, action: #selector(refreshBtnClicked(_:)), for: .touchUpInside)
+        tmpView.imgBtn.addTarget(self, action: #selector(refreshImgClicked(_:)), for: .touchUpInside)
         return tmpView
     }()
     
@@ -215,7 +219,7 @@ public class JHBaseEmptyView: UIView {
         super.init(frame: frame)
         let container: UIView = UIView()
         self.addSubview(container)
-        container.addSubview(imgView)
+        container.addSubview(imgBtn)
         container.addSubview(titleLabel)
         container.addSubview(refreshBtn)
         
@@ -232,13 +236,13 @@ public class JHBaseEmptyView: UIView {
             make.width.equalToSuperview()
         }
         
-        imgView.snp.makeConstraints { (make) in
+        imgBtn.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.centerX.equalToSuperview().offset(5)
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(imgView.snp.bottom).offset(20)
+            make.top.equalTo(imgBtn.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(12)
         }
         
@@ -263,10 +267,9 @@ public class JHBaseEmptyView: UIView {
         return tmpLabel
     }()
     
-    lazy public var imgView: UIImageView = {
-        let tmpView = UIImageView.init(frame: .zero)
-        let imgPath = "JHUniversalResource.bundle/nodata_green"
-        tmpView.image = UIImage.init(named: imgPath)
+    lazy public var imgBtn: UIButton = {
+        let tmpView = UIButton(type: .custom)
+        tmpView.adjustsImageWhenHighlighted = false
         return tmpView
     }()
     
