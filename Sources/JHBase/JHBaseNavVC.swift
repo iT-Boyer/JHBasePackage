@@ -12,7 +12,7 @@ import SnapKit
 
 open class JHBaseNavVC: UIViewController {
     
-    public var navTitle: String? {
+    @objc public var navTitle: String? {
         didSet {
             if let tmpTitle = navTitle, tmpTitle.isEmpty == false {
                 navBar.titleLabel.text = tmpTitle
@@ -42,16 +42,12 @@ open class JHBaseNavVC: UIViewController {
         self.view.backgroundColor = .kF5F5F5
         self.view.addSubview(navBar)
         navBar.frame = .init(x: 0, y: 0, width: kScreenWidth, height: kNaviBarMaxY)
-        
-        configUI()
     }
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
-    
-    open func configUI() {}
     
     // MARK: - Actions
     
