@@ -91,12 +91,12 @@ open class JHBaseNavVC: UIViewController {
     }
     
     func showEmptyView(in superView: UIView?, imgName: String, tipMsg: String) -> Self {
-        if imgName.contains(".bundle") == true {
-            emptyView.imgBtn.setImage(.init(named: imgName), for: .normal)
-        } else {
-            let imgPath = "JHUniversalResource.bundle/\(imgName)"
-            emptyView.imgBtn.setImage(.init(named: imgPath), for: .normal)
-        }
+//        if imgName.contains(".bundle") == true {
+//            emptyView.imgBtn.setImage(.init(named: imgName), for: .normal)
+//        } else {
+//            let imgPath = "JHUniversalResource.bundle/\(imgName)"
+//            emptyView.imgBtn.setImage(.init(named: imgPath), for: .normal)
+//        }
         emptyView.titleLabel.text = tipMsg
         
         var tmpView: UIView = self.view
@@ -194,7 +194,7 @@ public class JHBaseNavBar: UIView {
     lazy public var backBtn: UIButton = {
         let tmpBtn = UIButton.init(type: .custom)
         let imgPath = "JHUniversalResource.bundle/arrow_left_dark"
-        tmpBtn.setImage(UIImage.init(named: imgPath), for: .normal)
+        //tmpBtn.setImage(UIImage.init(named: imgPath), for: .normal)
         return tmpBtn
     }()
     
@@ -274,8 +274,8 @@ public class JHBaseEmptyView: UIView {
         tmpBtn.isHidden = true
         let normalPath = "JHUniversalResource.bundle/refresh_text_normal"
         let highlightPath = "JHUniversalResource.bundle/refresh_text_highlight"
-        tmpBtn.setImage(UIImage.init(named: normalPath), for: .normal)
-        tmpBtn.setImage(UIImage.init(named: highlightPath), for: .highlighted)
+//        tmpBtn.setImage(UIImage.init(named: normalPath), for: .normal)
+//        tmpBtn.setImage(UIImage.init(named: highlightPath), for: .highlighted)
         return tmpBtn
     }()
 }
