@@ -19,7 +19,7 @@ class JHTestVC: JHBaseNavVC {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.backgroundColor = .randomColor()
         test()
-        self.showNoDataView(in: self.view)
+        self.showNoDataView(self.view)
     }
     
     public func test() -> Void {

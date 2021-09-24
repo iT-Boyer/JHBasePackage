@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C7601FF26FD98DD005FA332 /* JHUniversalResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9C7601FE26FD98DD005FA332 /* JHUniversalResource.bundle */; };
 		9C7F9E3A26D8831D000642AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7F9E3926D8831D000642AD /* AppDelegate.swift */; };
 		9C7F9E3E26D8831D000642AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7F9E3D26D8831D000642AD /* ViewController.swift */; };
 		9C7F9E4126D8831D000642AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C7F9E3F26D8831D000642AD /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		4EB67E2826D8877400A30EA4 /* JHBasePackage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JHBasePackage; path = ..; sourceTree = "<group>"; };
+		9C7601FE26FD98DD005FA332 /* JHUniversalResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JHUniversalResource.bundle; sourceTree = "<group>"; };
 		9C7F9E3626D8831D000642AD /* JHBaseDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JHBaseDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7F9E3926D8831D000642AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C7F9E3D26D8831D000642AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		9C7F9E3826D8831D000642AD /* JHBaseDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9C7601FE26FD98DD005FA332 /* JHUniversalResource.bundle */,
 				9C7F9E3926D8831D000642AD /* AppDelegate.swift */,
 				9C7F9E3D26D8831D000642AD /* ViewController.swift */,
 				9CA9FA5A26D8C70200626811 /* JHTestVC.swift */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C7F9E4626D8831E000642AD /* LaunchScreen.storyboard in Resources */,
+				9C7601FF26FD98DD005FA332 /* JHUniversalResource.bundle in Resources */,
 				9C7F9E4326D8831E000642AD /* Assets.xcassets in Resources */,
 				9C7F9E4126D8831D000642AD /* Main.storyboard in Resources */,
 			);

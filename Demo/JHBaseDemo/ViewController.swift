@@ -18,9 +18,6 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let testVC = JHTestVC.init(title: "测试")
         testVC.modalPresentationStyle = .fullScreen
-        testVC.refresh {
-            print("ceshi\(String(describing: self.view.backgroundColor))")
-        }
         self.present(testVC, animated: true, completion: nil)
     }
 

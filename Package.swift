@@ -17,9 +17,6 @@ let package = Package(
             name: "JHBase",
             dependencies: [
                 .product(name: "SnapKit", package: "JHThird")
-            ],
-            resources: [
-                .process("Resources"),
             ]),
         .testTarget(
             name: "JHBaseTests",
