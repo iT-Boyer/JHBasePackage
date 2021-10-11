@@ -19,7 +19,8 @@ class JHTestVC: JHBaseNavVC {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.backgroundColor = .randomColor()
         test()
-        self.showNoDataView(self.view)
+        let aa = "baidu.com".fullURL
+        print(aa)
     }
     
     public func test() -> Void {
