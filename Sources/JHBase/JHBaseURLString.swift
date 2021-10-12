@@ -10,7 +10,7 @@ import Foundation
 public var kNetProtocol: String {
     let filepath = Bundle.main.path(forResource: "ipServiceFile", ofType: "plist")
     let ipDict = NSDictionary(contentsOfFile: filepath ?? "")
-    guard let ipDict = ipDict, let apiHeader = ipDict["api_header"] as? String else {
+    guard let ipDictTmp = ipDict, let apiHeader = ipDictTmp["api_header"] as? String else {
         return "https://"
     }
     if apiHeader.isEmpty == true {
@@ -22,7 +22,7 @@ public var kNetProtocol: String {
 public var kNetEnvironment: String {
     let filepath = Bundle.main.path(forResource: "ipFile", ofType: "plist")
     let ipDict = NSDictionary(contentsOfFile: filepath ?? "")
-    guard let ipDict = ipDict, let netEnv = ipDict["api_environment"] as? String else {
+    guard let ipDictTmp = ipDict, let netEnv = ipDictTmp["api_environment"] as? String else {
         return ""
     }
     return netEnv
