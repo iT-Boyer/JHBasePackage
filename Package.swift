@@ -13,7 +13,10 @@ let package = Package(
         .package(name: "JHThird", url: "http://192.168.9.190/publicplugingoup/JHThirdPackage.git", .branch("master"))
     ],
     targets: [
-        .target(name: "JHBase", dependencies: [.product(name: "SnapKit", package: "JHThird")]),
+        .target(name: "JHBase", dependencies: [
+            .product(name: "SnapKit", package: "JHThird"),
+            .product(name: "SwifterSwift", package: "JHThird"),
+        ]),
         .testTarget(name: "JHBaseTests", dependencies: ["JHBase"]),
     ],
     swiftLanguageVersions: [.v5]

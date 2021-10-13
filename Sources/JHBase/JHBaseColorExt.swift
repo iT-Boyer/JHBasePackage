@@ -6,6 +6,7 @@
 //  16进制颜色常量及便利方法
 
 import UIKit
+import SwifterSwift
 
 // MARK: - UIColor Constant
 extension UIColor {
@@ -176,72 +177,23 @@ extension UIColor {
 // MARK: - Hex to UIColor
 @objc extension UIColor {
     public static func initWithHex(_ hex: String) -> UIColor {
-        var hexStr: String = hex.trimmingCharacters(in: .whitespacesAndNewlines)
-        if hexStr.hasPrefix("#") {
-            hexStr = String(hexStr.dropFirst(1))
-        }
-        
-        let scanner = Scanner(string: hexStr)
-        var color: UInt64 = 0
-        scanner.scanHexInt64(&color)
-        
-        let mask = 0x000000FF
-        var r = Int(color >> 16) & mask
-        var g = Int(color >> 8) & mask
-        var b = Int(color) & mask
-        var a = 255
-        
-        if hexStr.count > 6 {
-            r = Int(color >> 24) & mask
-            g = Int(color >> 16) & mask
-            b = Int(color >> 8) & mask
-            a = Int(color) & mask
-        }
-        
-        let red   = CGFloat(r) / 255.0
-        let green = CGFloat(g) / 255.0
-        let blue  = CGFloat(b) / 255.0
-        let alpha = CGFloat(a) / 255.0
-        
-        return UIColor.init(red: red, green: green, blue: blue, alpha: alpha)
+        guard let color = Color(hexString: hex) else { return UIColor.clear }
+        return color
+    }
+    
+    public static func initWithHex(_ hex: String, alpha: CGFloat = 1.0) -> UIColor {
+        guard let color = Color(hexString: hex, transparency: alpha) else { return UIColor.clear }
+        return color
     }
     
     public static func randomColor() -> UIColor{
-        #if DEBUG
-            let r = CGFloat(arc4random()%255)/255
-            let g = CGFloat(arc4random()%255)/255
-            let b = CGFloat(arc4random()%255)/255
-            return UIColor.init(red: r, green: g, blue: b, alpha: 1.0)
-        #else
-            return UIColor.clear;
-        #endif
-    }
-}
-
-// MARK: - UIColor to Hex
-extension UIColor {
-    typealias RGBA = (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
-    private var rgba: RGBA? {
-        var (r,g,b,a): RGBA = (0,0,0,0)
-        return self.getRed(&r, green: &g, blue: &b, alpha: &a) ? (r,g,b,a) : nil
-    }
-    
-    public var hexString: String? {
-        guard let rgba = rgba else { return nil }
-        let rgbaStr = String(format: "%02x%02x%02x",
-                             Int(rgba.red * 255.0),
-                             Int(rgba.green * 255.0),
-                             Int(rgba.blue * 255.0))
-        return rgbaStr.uppercased()
-    }
-    
-    public var hexaString: String? {
-        guard let rgba = rgba else { return nil }
-        let rgbaStr = String(format: "%02x%02x%02x%02x",
-                             Int(rgba.red * 255.0),
-                             Int(rgba.green * 255.0),
-                             Int(rgba.blue * 255.0),
-                             Int(rgba.alpha * 255.0))
-        return rgbaStr.uppercased()
+#if DEBUG
+        let r = CGFloat(arc4random()%255)/255
+        let g = CGFloat(arc4random()%255)/255
+        let b = CGFloat(arc4random()%255)/255
+        return UIColor.init(red: r, green: g, blue: b, alpha: 1.0)
+#else
+        return UIColor.clear;
+#endif
     }
 }
