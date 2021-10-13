@@ -19,6 +19,19 @@ public let kNaviBarMaxY: CGFloat       = kNaviBarHeight + kStatusBarHeight
 
 public var kPhoneXSeries: Bool {
     if #available(iOS 11.0, *) {
+        if #available(iOS 13.0, *) {
+            for scene in UIApplication.shared.connectedScenes {
+                guard let winScene = scene as? UIWindowScene else { continue }
+                for win in winScene.windows {
+                    if win.isKeyWindow == true {
+                        return win.safeAreaInsets.bottom > 0
+                    }
+                }
+                if let firstWin = winScene.windows.first {
+                    return firstWin.safeAreaInsets.bottom > 0
+                }
+            }
+        }
         guard let keyWin: UIWindow? = UIApplication.shared.delegate?.window else { return false }
         guard let safeBtm: CGFloat = keyWin?.safeAreaInsets.bottom else { return false }
         return (safeBtm > 0)
