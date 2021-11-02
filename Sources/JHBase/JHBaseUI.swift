@@ -19,22 +19,8 @@ public let kNaviBarMaxY: CGFloat       = kNaviBarHeight + kStatusBarHeight
 
 public var kPhoneXSeries: Bool {
     if #available(iOS 11.0, *) {
-        if #available(iOS 13.0, *) {
-            for scene in UIApplication.shared.connectedScenes {
-                guard let winScene = scene as? UIWindowScene else { continue }
-                for win in winScene.windows {
-                    if win.isKeyWindow == true {
-                        return win.safeAreaInsets.bottom > 0
-                    }
-                }
-                if let firstWin = winScene.windows.first {
-                    return firstWin.safeAreaInsets.bottom > 0
-                }
-            }
-        }
-        guard let keyWin: UIWindow? = UIApplication.shared.delegate?.window else { return false }
-        guard let safeBtm: CGFloat = keyWin?.safeAreaInsets.bottom else { return false }
-        return (safeBtm > 0)
+        guard let keyWin = kWindow else { return false }
+        return (keyWin.safeAreaInsets.bottom > 0)
     }
     return false
 }
@@ -58,4 +44,22 @@ public func kWidth(width: CGFloat) -> CGFloat{
 public func kHeight(height: CGFloat) -> CGFloat{
     let hgt = (kScreenWidth/320)*(height)
     return hgt
+}
+
+public var kWindow: UIWindow? {
+    var resultWindow: UIWindow? = nil
+    if #available(iOS 13.0, *) {
+        let scenesSet = UIApplication.shared.connectedScenes
+        for scene in scenesSet {
+            guard let winScene = scene as? UIWindowScene else { continue }
+            if let keyWin = winScene.windows.first(where: { $0.isKeyWindow }) {
+                resultWindow = keyWin
+            }
+        }
+        if let scene = scenesSet.first as? UIWindowScene, resultWindow == nil {
+            resultWindow = scene.windows.first
+        }
+        return resultWindow
+    }
+    return UIApplication.shared.delegate?.window ?? resultWindow
 }

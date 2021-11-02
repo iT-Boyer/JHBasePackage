@@ -9,6 +9,14 @@ import UIKit
 
 extension UIViewController {
     
+    public static var topMostVC: UIViewController? {
+        var topVC = kWindow?.rootViewController
+        while topVC?.presentedViewController != nil {
+            topVC = topVC?.presentedViewController
+        }
+        return topVC
+    }
+    
     public static var getRootPresentedVC: UIViewController? {
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
         if ((rootVC?.presentedViewController) != nil) {
