@@ -15,6 +15,7 @@ let package = Package(
     targets: [
         .target(name: "JHBase", dependencies: [
             .product(name: "SnapKit", package: "JHThird"),
+            .product(name: "Alamofire", package: "JHThird"),
             .product(name: "SwifterSwift", package: "JHThird"),
         ]),
         .testTarget(name: "JHBaseTests", dependencies: ["JHBase"]),
