@@ -16,7 +16,7 @@ public enum JHBaseNetStatus: String {
     case wifi        = "wifi"
 }
 
-class JHBaseStatusManager: NSObject {
+public class JHBaseStatusManager: NSObject {
     public static let shared = JHBaseStatusManager()
     
     // MARK: - private
