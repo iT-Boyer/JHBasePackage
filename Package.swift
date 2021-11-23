@@ -17,8 +17,8 @@ let package = Package(
             .product(name: "SnapKit", package: "JHThird"),
             .product(name: "Alamofire", package: "JHThird"),
             .product(name: "SwifterSwift", package: "JHThird"),
-        ]),
-        .testTarget(name: "JHBaseTests", dependencies: ["JHBase"]),
+        ], path: "JHBase"),
+        .testTarget(name: "JHBaseTests", dependencies: ["JHBase"], path: "JHBaseTests"),
     ],
     swiftLanguageVersions: [.v5]
 )
