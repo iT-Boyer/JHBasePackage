@@ -16,9 +16,13 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        testVC()
+    }
+    
+    func testVC() {
         let testVC = JHTestVC.init(title: "测试")
         testVC.modalPresentationStyle = .fullScreen
-        self.present(testVC, animated: true, completion: nil)
+        present(testVC, animated: true, completion: nil)
     }
 
 }
