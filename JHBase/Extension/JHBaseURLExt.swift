@@ -9,10 +9,8 @@ import Foundation
 
 extension URL {
     public static func changProtocolURL(with urlString: String?) -> URL? {
-        let httpStr = JHBaseURL.changeProtocol(with: urlString)
-        if httpStr.isEmpty == true {
-            return nil
-        }
+        let httpStr = JHBaseDomain.changeProtocol(with: urlString)
+        if httpStr.isEmpty == true { return nil }
         return URL(string: httpStr)
     }
 }

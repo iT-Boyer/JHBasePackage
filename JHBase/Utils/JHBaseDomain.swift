@@ -1,10 +1,10 @@
 //  Created by lifei on 2021/11/29.
-//  域名读取工具
+//  域名统一调用工具
 
 import Foundation
 
-public class JHBaseURL: NSObject {
-    public static let shared = JHBaseURL()
+public class JHBaseDomain: NSObject {
+    public static let shared = JHBaseDomain()
     private override init() {}
     
     // MARK: - API
@@ -35,16 +35,16 @@ public class JHBaseURL: NSObject {
             return urlStr
         }
         let isWhite = shared.whiteList.contains { urlStr.contains($0) }
-        if isWhite == true {
-            return urlStr
-        }
+        if isWhite == true { return urlStr }
+        
         if lowerUrl.hasPrefix("http") == false || lowerUrl.contains("iuoooo.com") == false {
             return urlStr
         }
         var urlList: [String] = urlStr.components(separatedBy: "://")
-        if urlList.count > 0 {
+        if urlList.isEmpty == false {
             urlList[0] = "https"
         }
+        
         let joinedUrl = urlList.joined(separator: "://")
         return joinedUrl
     }
@@ -61,18 +61,18 @@ public class JHBaseURL: NSObject {
     }()
     
     private lazy var environment: String = {
-        return JHBaseURL.domain(for: "api_environment")
+        return JHBaseDomain.domain(for: "api_environment")
     }()
     
     private lazy var netProtocol: String = {
-        let urlProtocol = JHBaseURL.domain(for: "api_header")
+        let urlProtocol = JHBaseDomain.domain(for: "api_header")
         if urlProtocol.isEmpty == true { return "https://" }
         return urlProtocol
     }()
     
     private lazy var uploadBaseURL: String = {
-        let domainTest = JHBaseURL.domain(for: "api_host_upload")
-        let domainProduct = JHBaseURL.domain(for: "api_host_upload_up")
+        let domainTest = JHBaseDomain.domain(for: "api_host_upload")
+        let domainProduct = JHBaseDomain.domain(for: "api_host_upload_up")
         if environment.isEmpty == false {
             return "\(netProtocol)\(environment)\(domainTest)"
         }
@@ -80,7 +80,7 @@ public class JHBaseURL: NSObject {
     }()
     
     private lazy var downloadBaseURL: String = {
-        let domain = JHBaseURL.domain(for: "api_host_upload")
+        let domain = JHBaseDomain.domain(for: "api_host_upload")
         return "\(netProtocol)\(environment)\(domain)"
     }()
     
