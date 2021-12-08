@@ -3,8 +3,9 @@
 
 import UIKit
 
+// MARK: - API
 public class JHBaseAlert: NSObject {
-    // MARK: - API
+    
     public static func showSheet(title: String? = nil, msg: String? = nil,
                                  btns:[String]? = nil, types:[UIAlertAction.Style]? = nil,
                                  handler: ((Int) -> Void)? = nil)
@@ -20,8 +21,10 @@ public class JHBaseAlert: NSObject {
         showAlertOrSheet(style: .alert, title: title, msg: msg,
                          btns: btns, types: types, handler: handler)
     }
-    
-    // MARK: - Private
+}
+
+// MARK: - Private
+extension JHBaseAlert {
     private static func showAlertOrSheet(style: UIAlertController.Style, title: String? = nil,
                                          msg: String? = nil, btns:[String]? = nil,
                                          types:[UIAlertAction.Style]? = nil, handler: ((Int) -> Void)? = nil)
@@ -44,5 +47,4 @@ public class JHBaseAlert: NSObject {
         }
         UIViewController.topVC?.present(alertVC, animated: true, completion: nil)
     }
-    
 }

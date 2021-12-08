@@ -4,18 +4,19 @@
 
 ## 声明规范
 
-1. 声明对象，变量使用 var，常量使用 let；
-2. typealias 声明别名，作用域尽量包含在类中，e.g.`typealias FinishHandler = (String) -> Void`；
-3. 使用 String、Array、Dictionary、Int、Bool 代替 NSString、NSArray、NSDictionary、NSNumber、BOOL；
-4. 使用 struct 代替 Class，使用 print 代替 NSLog 等；
+* 声明对象，变量使用 var，常量使用 let；
+* typealias 声明别名，作用域尽量包含在类中，e.g.`typealias FinishHandler = (String) -> Void`；
+* 使用 String、Array、Dictionary、Int、Bool 代替 NSString、NSArray、NSDictionary、NSNumber、BOOL；
+* 使用 struct 代替 Class，使用 print 代替 NSLog 等；
+* OC 桥接至 Swift，调用 Swift 方法时，Swift 方法中参数必须声明为可选类型（Optional）；
 
 ## 推荐语法
 
-1. 优先使用 guard 和 ?? 进行解包，`guard let > ?? > if let`；
-2. JSON序列化与逆序列化，为了程序的健壮性，成员变量尽量设置为可选类型（Optional）；
-3. 数组推荐声明方式，e.g.`var list: [Any]? // Any 更改为指定类型`
-4. 字典推荐声明方式，e.g.`var dict: [String: Any]? // Any 更改为指定类型`
-5. 方法的参数和返回值推荐声明方式，e.g.
+* 优先使用 guard 和 ?? 进行解包，`guard let > ?? > if let`；
+* JSON序列化与逆序列化，为了程序的健壮性，成员变量尽量设置为可选类型（Optional）；
+* 数组推荐声明方式，e.g.`var list: [Any]? // Any 更改为指定类型`
+* 字典推荐声明方式，e.g.`var dict: [String: Any]? // Any 更改为指定类型`
+* 方法的参数和返回值推荐声明方式，e.g.
 ```swift
 // 返回 Void 省略
 func m1() {}
@@ -26,17 +27,17 @@ func m3() -> [String: Any]? { return[:] }
 // 参数直接指定为对应类型
 func m4(v1: [String: Any]?, v2: [Any]?) {}
 ```
-6. 字典或数组中取出的值为 Any 类型的可选值，转换使用`as?`，尽量不使用`as!`，防止程序 Crash；
-7. Array、Set、String、Dictionary 对象判空时，使用 `obj.isEmpty` 方法代替 `obj.count == 0`；
-8. 闭包中需要显式地引用 self，如果处理循环引用，用 weak 修饰 self，e.g.
+* 字典或数组中取出的值为 Any 类型的可选值，转换使用`as?`，尽量不使用`as!`，防止程序 Crash；
+* Array、Set、String、Dictionary 对象判空时，使用 `obj.isEmpty` 方法代替 `obj.count == 0`；
+* 闭包中需要显式地引用 self，如果处理循环引用，用 weak 修饰 self，e.g.
 ```swift
 table.es.addPullToRefresh { [weak self] in
     guard let strongSelf = self else { return }
     strongSelf.tableView.es.stopLoadingMore()
 }
 ```
-9. 省略 self，访问成员变量和方法时，除闭包中需要显式引用 self 外，其余不需要像 ObjC 那样使用 self 引用；
-10. 省略 `init()`，e.g.使用`let label = UILabel()`，而不是`let label = UILabel.init()`；
+* 省略 self，访问成员变量和方法时，除闭包中需要显式引用 self 外，其余不需要像 ObjC 那样使用 self 引用；
+* 省略 `init()`，e.g.使用`let label = UILabel()`，而不是`let label = UILabel.init()`；
 
 ---------
 待整理
