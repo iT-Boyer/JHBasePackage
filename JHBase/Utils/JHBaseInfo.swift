@@ -6,24 +6,29 @@ import GRDB
 
 // MARK: - API
 public class JHBaseInfo: NSObject {
-    
     public static let shared = JHBaseInfo()
     private override init() {}
     
-    private static let emptyID = "00000000-0000-0000-0000-000000000000"
-    private static let kJHBaseAnonymousLoginNotiName = "kJHBaseAnonymousLoginNotiName"
-    
     // MARK: - API
-    //public static let appID = ""
-    public static let bundleID = ""
-    public static let appVersion = ""
+    public static var orgID: String { shared.orgID }
+    public static var appID: String { shared.appID }
+    public static var appName: String { shared.appName }
+    public static var appVersion: String { shared.appVersion }
     
-    public static var orgID: String {
-        let infoOrgID = Bundle.main.infoDictionary?["ORGID"] as? String
-        return infoOrgID ?? ""
-    }
+    public static var userID: String { shared.userID }
+    public static var userAccount: String { shared.userAccount }
+    public static var userName: String { shared.userName }
+    public static var userIcon: String { shared.userIcon }
+    public static var userMsgDict: [String: Any] { shared.userMsgDict }
     
-    public static var appID: String {
+    public static var isLogined: Bool { shared.isLogined }
+    public static var isOfficialLogined: Bool { shared.isOfficialLogined }
+    
+    // MARK: - Private
+    private let emptyID = "00000000-0000-0000-0000-000000000000"
+    private let kJHBaseAnonymousLoginNotiName = "kJHBaseAnonymousLoginNotiName"
+    
+    private var appID: String {
         let defaultsAppID = UserDefaults.standard.string(forKey: "ProjectAppIDKey20160922")
         if let defaultsAppID = defaultsAppID, defaultsAppID.isEmpty == false {
             return defaultsAppID
@@ -32,9 +37,9 @@ public class JHBaseInfo: NSObject {
         return infoAppID ?? ""
     }
     
-    public static var userID: String {
-        let officialName = shared.userInfoDict["LOGINUSERID"] as? String
-        let anonymousName = shared.userInfoDict["ANONYMOUSUSERNAME"] as? String
+    private var userID: String {
+        let officialName = JHBaseInfo.shared.userInfoDict["LOGINUSERID"] as? String
+        let anonymousName = JHBaseInfo.shared.userInfoDict["ANONYMOUSUSERNAME"] as? String
         if let oName = officialName, oName.isEmpty == false, isOfficialLogined == true {
             return oName
         }
@@ -48,18 +53,18 @@ public class JHBaseInfo: NSObject {
         return emptyID
     }
     
-    public static var userAccount: String {
+    private var userAccount: String {
         if isOfficialLogined == true {
-            let officialName = shared.userInfoDict["USERNAME"] as? String
+            let officialName = JHBaseInfo.shared.userInfoDict["USERNAME"] as? String
             return officialName ?? ""
         }
-        let anonymousName = shared.userInfoDict["ANONYMOUSUSERACCOUNT"] as? String
+        let anonymousName = JHBaseInfo.shared.userInfoDict["ANONYMOUSUSERACCOUNT"] as? String
         return anonymousName ?? ""
     }
     
-    public static var isLogined: Bool {
-        let officialStatus = shared.userInfoDict["LOGINSTATUS"] as? String
-        let anonymousStatus = shared.userInfoDict["ANONYMOUSLOGINSTATUS"] as? String
+    private var isLogined: Bool {
+        let officialStatus = JHBaseInfo.shared.userInfoDict["LOGINSTATUS"] as? String
+        let anonymousStatus = JHBaseInfo.shared.userInfoDict["ANONYMOUSLOGINSTATUS"] as? String
         if let status = officialStatus, status == "YES" {
             return true
         }
@@ -69,29 +74,40 @@ public class JHBaseInfo: NSObject {
         return false
     }
     
-    public static var isOfficialLogined: Bool {
-        let officialStatus = shared.userInfoDict["LOGINSTATUS"] as? String
+    private var isOfficialLogined: Bool {
+        let officialStatus = JHBaseInfo.shared.userInfoDict["LOGINSTATUS"] as? String
         if let status = officialStatus, status == "YES" {
             return true
         }
         return false
     }
     
-    public static var userName: String {
+    private var userName: String {
         return userMsgModel.userName ?? ""
     }
     
-    public static var userIcon: String {
+    private var userIcon: String {
         return userMsgModel.userHeadurl ?? ""
     }
     
-    public static var userMsgDict: [String: Any] {
+    private var userMsgDict: [String: Any] {
         return userMsgModel.toDict()
     }
     
-    fileprivate static var userMsgModel: UserMessage {
+    private var userInfoDict: [String: Any] {
+        guard let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { return [:] }
+        let filePath = documentDir.appendingPathComponent("userinfo.plist")
+        let fileURL = URL(fileURLWithPath: filePath)
+        let fileDict = try? NSDictionary(contentsOf: fileURL, error: ())
+        if let fileDict = fileDict as? [String: Any] {
+            return fileDict
+        }
+        return [:]
+    }
+    
+    fileprivate var userMsgModel: UserMessage {
         let emptyModel = UserMessage()
-        let dbPath = shared.databasePath
+        let dbPath = JHBaseInfo.shared.databasePath
         if dbPath.isEmpty == true { return emptyModel }
         guard let dbQueue = try? DatabaseQueue(path: dbPath) else { return emptyModel }
         let players: [UserMessage]? = try? dbQueue.read { db in
@@ -102,18 +118,22 @@ public class JHBaseInfo: NSObject {
     }
     
     // MARK: - Lazy Load
-    private lazy var userInfoDict: [String: Any] = {
-        guard let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { return [:] }
-        let filePath = documentDir.appendingPathComponent("userinfo.plist")
-        let fileURL = URL(fileURLWithPath: filePath)
-        let fileDict = try? NSDictionary(contentsOf: fileURL, error: ())
-        if let fileDict = fileDict as? [String: Any] {
-            return fileDict
-        }
-        return [:]
+    private lazy var orgID: String = {
+        let infoOrgID = Bundle.main.infoDictionary?["ORGID"] as? String
+        return infoOrgID ?? ""
     }()
     
-    lazy var databasePath: String = {
+    private lazy var appName: String = {
+        let infoAppName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
+        return infoAppName ?? ""
+    }()
+    
+    private lazy var appVersion: String = {
+        let infoAppName = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        return infoAppName ?? ""
+    }()
+    
+    private lazy var databasePath: String = {
         let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
         guard let cacheDir = cacheDir else { return "" }
         let sqlitePath = cacheDir.appendingPathComponent("JHBase.db")
