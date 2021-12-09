@@ -2,7 +2,6 @@
 //  读取应用基础信息
 
 import UIKit
-import GRDB
 
 // MARK: - API
 public class JHBaseInfo: NSObject {
@@ -17,9 +16,6 @@ public class JHBaseInfo: NSObject {
     
     public static var userID: String { shared.userID }
     public static var userAccount: String { shared.userAccount }
-    public static var userName: String { shared.userName }
-    public static var userIcon: String { shared.userIcon }
-    public static var userMsgDict: [String: Any] { shared.userMsgDict }
     
     public static var isLogined: Bool { shared.isLogined }
     public static var isOfficialLogined: Bool { shared.isOfficialLogined }
@@ -82,18 +78,6 @@ public class JHBaseInfo: NSObject {
         return false
     }
     
-    private var userName: String {
-        return userMsgModel.userName ?? ""
-    }
-    
-    private var userIcon: String {
-        return userMsgModel.userHeadurl ?? ""
-    }
-    
-    private var userMsgDict: [String: Any] {
-        return userMsgModel.toDict()
-    }
-    
     private var userInfoDict: [String: Any] {
         guard let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { return [:] }
         let filePath = documentDir.appendingPathComponent("userinfo.plist")
@@ -103,18 +87,6 @@ public class JHBaseInfo: NSObject {
             return fileDict
         }
         return [:]
-    }
-    
-    fileprivate var userMsgModel: UserMessage {
-        let emptyModel = UserMessage()
-        let dbPath = JHBaseInfo.shared.databasePath
-        if dbPath.isEmpty == true { return emptyModel }
-        guard let dbQueue = try? DatabaseQueue(path: dbPath) else { return emptyModel }
-        let players: [UserMessage]? = try? dbQueue.read { db in
-            try UserMessage.fetchAll(db)
-        }
-        guard let userMsg = players?.last else { return emptyModel }
-        return userMsg
     }
     
     // MARK: - Lazy Load
@@ -132,44 +104,72 @@ public class JHBaseInfo: NSObject {
         let infoAppName = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         return infoAppName ?? ""
     }()
-    
-    private lazy var databasePath: String = {
-        let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
-        guard let cacheDir = cacheDir else { return "" }
-        let sqlitePath = cacheDir.appendingPathComponent("JHBase.db")
-        return sqlitePath
-    }()
 }
 
+// MARK: - JHBase暂不依赖数据库，暂不读取用户名和用户图标
+//public static var userName: String { shared.userName }
+//public static var userIcon: String { shared.userIcon }
+//public static var userMsgDict: [String: Any] { shared.userMsgDict }
+//private var userName: String {
+//    return userMsgModel.userName ?? ""
+//}
+//
+//private var userIcon: String {
+//    return userMsgModel.userHeadurl ?? ""
+//}
+//
+//private var userMsgDict: [String: Any] {
+//    return userMsgModel.toDict()
+//}
+//
+//fileprivate var userMsgModel: UserMessage {
+//    let emptyModel = UserMessage()
+//    let dbPath = JHBaseInfo.shared.databasePath
+//    if dbPath.isEmpty == true { return emptyModel }
+//    guard let dbQueue = try? DatabaseQueue(path: dbPath) else { return emptyModel }
+//    let players: [UserMessage]? = try? dbQueue.read { db in
+//        try UserMessage.fetchAll(db)
+//    }
+//    guard let userMsg = players?.last else { return emptyModel }
+//    return userMsg
+//}
+
+//private lazy var databasePath: String = {
+//    let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first
+//    guard let cacheDir = cacheDir else { return "" }
+//    let sqlitePath = cacheDir.appendingPathComponent("JHBase.db")
+//    return sqlitePath
+//}()
+
 /// 数据库 JHBase.db 中保存的 UserMessage
-fileprivate struct UserMessage: Codable, FetchableRecord, PersistableRecord {
-    var userid: String?
-    var userName: String?
-    var missHome: String?
-    var homeTown: String?
-    var persionalized: String?
-    var error: String?
-    var liveCity: String?
-    var userHeadurl: String?
-    var phoneNumber: String?
-    var hometownCode: String?
-    var sexNum: Int?
-    var birthday: String?
-    
-    func toDict() -> [String: Any] {
-        let tmpDict: [String: Any] = ["userid": userid ?? "",
-                                      "userName": userName ?? "",
-                                      "missHome": missHome ?? "",
-                                      "homeTown": homeTown ?? "",
-                                      "persionalized": persionalized ?? "",
-                                      "error": error ?? "",
-                                      "liveCity": liveCity ?? "",
-                                      "userHeadurl": userHeadurl ?? "",
-                                      "phoneNumber":phoneNumber ?? "",
-                                      "hometownCode": hometownCode ?? "",
-                                      "sexNum": sexNum ?? 0,
-                                      "birthday": birthday ?? ""]
-        
-        return tmpDict
-    }
-}
+//fileprivate struct UserMessage: Codable, FetchableRecord, PersistableRecord {
+//    var userid: String?
+//    var userName: String?
+//    var missHome: String?
+//    var homeTown: String?
+//    var persionalized: String?
+//    var error: String?
+//    var liveCity: String?
+//    var userHeadurl: String?
+//    var phoneNumber: String?
+//    var hometownCode: String?
+//    var sexNum: Int?
+//    var birthday: String?
+//
+//    func toDict() -> [String: Any] {
+//        let tmpDict: [String: Any] = ["userid": userid ?? "",
+//                                      "userName": userName ?? "",
+//                                      "missHome": missHome ?? "",
+//                                      "homeTown": homeTown ?? "",
+//                                      "persionalized": persionalized ?? "",
+//                                      "error": error ?? "",
+//                                      "liveCity": liveCity ?? "",
+//                                      "userHeadurl": userHeadurl ?? "",
+//                                      "phoneNumber":phoneNumber ?? "",
+//                                      "hometownCode": hometownCode ?? "",
+//                                      "sexNum": sexNum ?? 0,
+//                                      "birthday": birthday ?? ""]
+//
+//        return tmpDict
+//    }
+//}
