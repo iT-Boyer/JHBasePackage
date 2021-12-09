@@ -31,6 +31,16 @@ public class JHBaseNetwork {
     public func cancelAll() {
         taskList.forEach { $0.cancel() }
     }
+    
+    // MARK: - Lazy Load
+    private lazy var clientInfoDict: [String: Any] = {
+        let fileURL = Bundle.main.url(forResource: "JHVersion", withExtension: "plist")
+        guard let tmpFileURL = fileURL else { return [:] }
+        let fileDict = try? NSDictionary(contentsOf: tmpFileURL, error: ())
+        guard let fileDict = fileDict as? [String: Any] else { return [:] }
+        guard let clientDict = fileDict["clientInfo"] as? [String: Any] else { return [:] }
+        return clientDict
+    }()
 }
 
 // MARK: - Private
@@ -46,11 +56,17 @@ extension JHBaseNetwork {
         if let headersDict = headers {
             httpHeaders = HTTPHeaders(headersDict)
         }
+        // 增加 clientInfo 公共参数
+        var paramDict: [String: Any] = parameters ?? [:]
+        if method != .get {
+            let clientDict: [String: Any] = readClientInfoDict()
+            paramDict["clientInfo"] = clientDict
+        }
         
         weak var weakTask = task
         task.request = AF.request(url,
                                   method: method,
-                                  parameters: parameters,
+                                  parameters: paramDict,
                                   encoding: encoding,
                                   headers: httpHeaders).validate().response
         { [weak self] resp in
@@ -83,6 +99,18 @@ extension JHBaseNetwork {
         }
         taskList.append(task)
         return task
+    }
+    
+    // 读取 JHVersion.plist 中的配置
+    func readClientInfoDict() -> [String: Any] {
+        let version = clientInfoDict["version"] as? String ?? "v1.8.0"
+        let versionNum = clientInfoDict["version"] as? Int ?? 180
+        let device = clientInfoDict["device"] as? String ?? "ios"
+        let appID = Bundle.main.infoDictionary?["APPID"] as? String ?? JHBaseInfo.appID
+        let userID = JHBaseInfo.userID
+        let clientDict: [String: Any] = ["version": version, "versionNum": versionNum,
+                                         "device": device, "appid": appID, "userId": userID]
+        return clientDict
     }
 }
 
