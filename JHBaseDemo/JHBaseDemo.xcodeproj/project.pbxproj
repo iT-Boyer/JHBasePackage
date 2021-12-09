@@ -15,6 +15,7 @@
 		9C7F9E4626D8831E000642AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C7F9E4426D8831E000642AD /* LaunchScreen.storyboard */; };
 		9C92B3B626E09E49002C8337 /* JHBase in Frameworks */ = {isa = PBXBuildFile; productRef = 9C92B3B526E09E49002C8337 /* JHBase */; };
 		9CA9FA5B26D8C70200626811 /* JHTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA9FA5A26D8C70200626811 /* JHTestVC.swift */; };
+		9CE416272762027C00CC757B /* JHVersion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CE416262762027C00CC757B /* JHVersion.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9C7F9E4526D8831E000642AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C7F9E4726D8831E000642AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CA9FA5A26D8C70200626811 /* JHTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHTestVC.swift; sourceTree = "<group>"; };
+		9CE416262762027C00CC757B /* JHVersion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JHVersion.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				9C7F9E3F26D8831D000642AD /* Main.storyboard */,
 				9C7F9E4226D8831E000642AD /* Assets.xcassets */,
 				9C7F9E4426D8831E000642AD /* LaunchScreen.storyboard */,
+				9CE416262762027C00CC757B /* JHVersion.plist */,
 				9C7F9E4726D8831E000642AD /* Info.plist */,
 			);
 			path = JHBaseDemo;
@@ -112,7 +115,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					9C7F9E3526D8831D000642AD = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -145,6 +148,7 @@
 				9C7F9E4626D8831E000642AD /* LaunchScreen.storyboard in Resources */,
 				9C7601FF26FD98DD005FA332 /* JHUniversalResource.bundle in Resources */,
 				9C7F9E4326D8831E000642AD /* Assets.xcassets in Resources */,
+				9CE416272762027C00CC757B /* JHVersion.plist in Resources */,
 				9C7F9E4126D8831D000642AD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,7 +239,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -290,7 +294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -54,10 +54,8 @@ public class JHBaseDomain: NSObject {
         let fileURL = Bundle.main.url(forResource: "ipFile", withExtension: "plist")
         guard let tmpFileURL = fileURL else { return [:] }
         let fileDict = try? NSDictionary(contentsOf: tmpFileURL, error: ())
-        if let fileDict = fileDict as? [String: String] {
-            return fileDict
-        }
-        return [:]
+        guard let fileDict = fileDict as? [String: String] else { return [:] }
+        return fileDict
     }()
     
     private lazy var environment: String = {

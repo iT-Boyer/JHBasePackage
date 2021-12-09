@@ -62,7 +62,6 @@ extension JHBaseNetwork {
             let clientDict: [String: Any] = readClientInfoDict()
             paramDict["clientInfo"] = clientDict
         }
-        
         weak var weakTask = task
         task.request = AF.request(url,
                                   method: method,
@@ -102,9 +101,9 @@ extension JHBaseNetwork {
     }
     
     // 读取 JHVersion.plist 中的配置
-    func readClientInfoDict() -> [String: Any] {
+    private func readClientInfoDict() -> [String: Any] {
         let version = clientInfoDict["version"] as? String ?? "v1.8.0"
-        let versionNum = clientInfoDict["version"] as? Int ?? 180
+        let versionNum = clientInfoDict["versionNum"] as? Int ?? 180
         let device = clientInfoDict["device"] as? String ?? "ios"
         let appID = Bundle.main.infoDictionary?["APPID"] as? String ?? JHBaseInfo.appID
         let userID = JHBaseInfo.userID
@@ -144,7 +143,17 @@ public class JHBaseNetworkRequest: Equatable {
         return self
     }
     
-    func handleResponse(resp: AFDataResponse<Data?>) {
+    public func cancel() {
+        request?.cancel()
+    }
+    
+    // MARK: - Equatable
+    public static func == (lhs: JHBaseNetworkRequest, rhs: JHBaseNetworkRequest) -> Bool {
+        return lhs.request?.id == rhs.request?.id
+    }
+    
+    // MARK: - Private
+    fileprivate func handleResponse(resp: AFDataResponse<Data?>) {
         switch resp.result {
         case .success(let data):
             if let successHandler = successHandler {
@@ -159,19 +168,10 @@ public class JHBaseNetworkRequest: Equatable {
         }
     }
     
-    func handleProgress(progress: Foundation.Progress) {
+    fileprivate func handleProgress(progress: Foundation.Progress) {
         if let closure = progressHandler {
             closure(progress)
         }
-    }
-    
-    func cancel() {
-        request?.cancel()
-    }
-    
-    // MARK: - Equatable
-    public static func == (lhs: JHBaseNetworkRequest, rhs: JHBaseNetworkRequest) -> Bool {
-        return lhs.request?.id == rhs.request?.id
     }
 }
 
