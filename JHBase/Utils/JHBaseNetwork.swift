@@ -120,23 +120,22 @@ extension JHBaseNetwork {
 public class JHBaseNetworkRequest: Equatable {
     var request: Alamofire.Request?
     
-    public typealias JHBaseSuccessClosure = (_ data: Data?, _ response: HTTPURLResponse?) -> Void
-    public typealias JHBaseFailedClosure = (_ error: JHBaseNetworkError?, _ response: HTTPURLResponse?) -> Void
+    public typealias JHBaseFinishedClosure = (_ : JHBaseNetworkResponse) -> Void
     public typealias JHBaseProgressClosure = (Progress) -> Void
     
-    private var successHandler: JHBaseSuccessClosure?
-    private var failedHandler: JHBaseFailedClosure?
+    private var successHandler: JHBaseFinishedClosure?
+    private var failedHandler: JHBaseFinishedClosure?
     private var progressHandler: JHBaseProgressClosure?
     
     // MARK: - API
     @discardableResult
-    public func success(_ closure: @escaping JHBaseSuccessClosure) -> Self {
+    public func success(_ closure: @escaping JHBaseFinishedClosure) -> Self {
         successHandler = closure
         return self
     }
     
     @discardableResult
-    public func failed(_ closure: @escaping JHBaseFailedClosure) -> Self {
+    public func failed(_ closure: @escaping JHBaseFinishedClosure) -> Self {
         failedHandler = closure
         return self
     }
@@ -161,15 +160,34 @@ public class JHBaseNetworkRequest: Equatable {
         switch resp.result {
         case .success(let data):
             if let successHandler = successHandler {
-                successHandler(data, resp.response)
+                let baseResp = convertAFResponse(data: data,
+                                                 error: resp.error,
+                                                 response: resp.response)
+                successHandler(baseResp)
             }
         case .failure(let error):
             if let failedHandler = failedHandler {
-                let errorDesc = error.localizedDescription
-                let netError = JHBaseNetworkError(code: error.responseCode, desc: errorDesc)
-                failedHandler(netError, resp.response)
+                let baseResp = convertAFResponse(data: resp.data,
+                                                 error: error,
+                                                 response: resp.response)
+                failedHandler(baseResp)
             }
         }
+    }
+    
+    fileprivate func convertAFResponse(data: Data? = nil,
+                                       error: AFError? = nil,
+                                       response: HTTPURLResponse? = nil) -> JHBaseNetworkResponse {
+        let code = response?.statusCode
+        let headers = response?.allHeaderFields as? [String: String] ?? [:]
+        
+        let errorCode = error?.responseCode
+        let errorDesc = error?.localizedDescription
+        let baseError = JHBaseNetworkError(code: errorCode, desc: errorDesc)
+        
+        let baseResp = JHBaseNetworkResponse(data: data, error: baseError,
+                                             statusCode: code, headers: headers)
+        return baseResp
     }
     
     fileprivate func handleProgress(progress: Foundation.Progress) {
@@ -179,12 +197,28 @@ public class JHBaseNetworkRequest: Equatable {
     }
 }
 
+public class JHBaseNetworkResponse {
+    public let data: Data?
+    public let error: JHBaseNetworkError?
+    
+    public let statusCode: Int?
+    public let headers: [String: String]?
+    
+    init(data: Data?, error: JHBaseNetworkError?,
+         statusCode: Int?, headers: [String: String]?) {
+        self.data = data
+        self.error = error
+        self.statusCode = statusCode
+        self.headers = headers
+    }
+}
+
 public class JHBaseNetworkError {
-    public var errorCode: Int?
-    public var errorDesc: String?
+    public let errorCode: Int?
+    public let errorDesc: String?
     
     init(code: Int?, desc: String?) {
-        errorCode = code
-        errorDesc = desc
+        self.errorCode = code
+        self.errorDesc = desc
     }
 }
