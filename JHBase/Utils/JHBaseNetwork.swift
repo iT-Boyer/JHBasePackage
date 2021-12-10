@@ -120,23 +120,16 @@ extension JHBaseNetwork {
 public class JHBaseNetworkRequest: Equatable {
     var request: Alamofire.Request?
     
-    public typealias JHBaseFinishedClosure = (_ : JHBaseNetworkResponse) -> Void
+    public typealias JHBaseResponseClosure = (_ : JHBaseNetworkResponse) -> Void
     public typealias JHBaseProgressClosure = (Progress) -> Void
     
-    private var successHandler: JHBaseFinishedClosure?
-    private var failedHandler: JHBaseFinishedClosure?
+    private var responseHandler: JHBaseResponseClosure?
     private var progressHandler: JHBaseProgressClosure?
     
     // MARK: - API
     @discardableResult
-    public func success(_ closure: @escaping JHBaseFinishedClosure) -> Self {
-        successHandler = closure
-        return self
-    }
-    
-    @discardableResult
-    public func failed(_ closure: @escaping JHBaseFinishedClosure) -> Self {
-        failedHandler = closure
+    public func response(_ closure: @escaping JHBaseResponseClosure) -> Self {
+        responseHandler = closure
         return self
     }
     
@@ -157,27 +150,15 @@ public class JHBaseNetworkRequest: Equatable {
     
     // MARK: - Private
     fileprivate func handleResponse(resp: AFDataResponse<Data?>) {
-        switch resp.result {
-        case .success(let data):
-            if let successHandler = successHandler {
-                let baseResp = convertAFResponse(data: data,
-                                                 error: resp.error,
-                                                 response: resp.response)
-                successHandler(baseResp)
-            }
-        case .failure(let error):
-            if let failedHandler = failedHandler {
-                let baseResp = convertAFResponse(data: resp.data,
-                                                 error: error,
-                                                 response: resp.response)
-                failedHandler(baseResp)
-            }
+        if let responseHandler = responseHandler {
+            let baseResp = convertResponse(data: resp.data, error: resp.error, response: resp.response)
+            responseHandler(baseResp)
         }
     }
     
-    fileprivate func convertAFResponse(data: Data? = nil,
-                                       error: AFError? = nil,
-                                       response: HTTPURLResponse? = nil) -> JHBaseNetworkResponse {
+    fileprivate func convertResponse(data: Data? = nil,
+                                     error: AFError? = nil,
+                                     response: HTTPURLResponse? = nil) -> JHBaseNetworkResponse {
         let code = response?.statusCode
         let headers = response?.allHeaderFields as? [String: String] ?? [:]
         
