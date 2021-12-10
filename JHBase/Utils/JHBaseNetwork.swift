@@ -11,19 +11,23 @@ public class JHBaseNetwork {
     private var taskList: [JHBaseNetworkRequest] = []
     
     // MARK: - API
+    @discardableResult
     public func post(_ url: String,
                      parameters: [String: Any]? = nil,
                      headers: [String: String]? = nil) -> JHBaseNetworkRequest {
         request(url: url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
     }
     
+    @discardableResult
     public func get(_ url: String,
                     parameters: [String: Any]? = nil,
                     headers: [String: String]? = nil) -> JHBaseNetworkRequest {
         request(url: url, method: .get, parameters: parameters, encoding: URLEncoding.default)
     }
     
-    func upload(_ data: Data, url: String,
+    @discardableResult
+    func upload(_ data: Data,
+                url: String,
                 headers: [String: String]? = nil) -> JHBaseNetworkRequest {
         uploadFile(data, url: url, headers: headers)
     }

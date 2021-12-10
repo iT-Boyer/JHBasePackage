@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 
+public let JNStatusManager = JHBaseStatusManager.shared
 public let kJHBaseStatusNotiName = Notification.Name("kJHBaseNetStatusChanged")
 
 public enum JHBaseNetStatus: String {
