@@ -181,9 +181,10 @@ public class JHBaseNetworkRequest: Equatable {
         let code = response?.statusCode
         let headers = response?.allHeaderFields as? [String: String] ?? [:]
         
-        let errorCode = error?.responseCode
-        let errorDesc = error?.localizedDescription
-        let baseError = JHBaseNetworkError(code: errorCode, desc: errorDesc)
+        var baseError: JHBaseNetworkError? = nil
+        if let error = error, let errorCode = error.responseCode {
+            baseError = JHBaseNetworkError(code: errorCode, desc: error.localizedDescription)
+        }
         
         let baseResp = JHBaseNetworkResponse(data: data, error: baseError,
                                              statusCode: code, headers: headers)
