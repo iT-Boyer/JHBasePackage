@@ -51,7 +51,9 @@ public class JHBaseStatusManager: NSObject {
             case .reachable(.ethernetOrWiFi):
                 strongSelf.currentStauts = JHBaseNetStatus.wifi
             }
-            NotificationCenter.default.post(name: kJHBaseStatusNotiName, object: strongSelf.currentStauts)
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: kJHBaseStatusNotiName, object: strongSelf.currentStauts)
+            }
         })
     }
     

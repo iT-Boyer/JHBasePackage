@@ -44,8 +44,9 @@ public class JHBaseInfo: NSObject {
         }
         // 通知大组件(jinheruniversal)匿名登录
         let notiName = Notification.Name(kJHBaseAnonymousLoginNotiName)
-        NotificationCenter.default.post(name: notiName, object: nil)
-        
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: notiName, object: nil)
+        }
         return emptyID
     }
     
