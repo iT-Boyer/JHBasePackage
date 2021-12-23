@@ -21,26 +21,32 @@ public enum JHBaseNetStatus: String {
 public class JHBaseStatusManager: NSObject {
     public static let shared = JHBaseStatusManager()
     
-    // MARK: - private
+    // MARK: - API
+    public static var currentStauts: JHBaseNetStatus { shared.currentStauts }
+    public static var isReachable: Bool { shared.isReachable }
+    public static var isWiFi: Bool { shared.isWiFi }
+    public static var isCellular: Bool { shared.isCellular }
+    public static func startListening() { shared.startListening() }
+    public static func stopListening() { shared.stopListening() }
+    
+    // MARK: - Private
     private override init() {}
     private let alamoManager = NetworkReachabilityManager.default
+    private var currentStauts: JHBaseNetStatus = JHBaseNetStatus.cellular
     
-    // MARK: - API
-    public var currentStauts: JHBaseNetStatus = JHBaseNetStatus.cellular
-    
-    public var isReachable: Bool {
-        return alamoManager?.isReachable ?? false
+    private var isReachable: Bool {
+        return alamoManager?.isReachable ?? true
     }
     
-    public var isWiFi: Bool {
+    private var isWiFi: Bool {
         alamoManager?.isReachableOnEthernetOrWiFi ?? false
     }
     
-    public var isCellular: Bool {
+    private var isCellular: Bool {
         alamoManager?.isReachableOnCellular ?? false
     }
     
-    public func startListening() {
+    private func startListening() {
         alamoManager?.startListening(onUpdatePerforming: { [weak self] status in
             guard let strongSelf = self else { return }
             switch status {
@@ -57,7 +63,7 @@ public class JHBaseStatusManager: NSObject {
         })
     }
     
-    public func stopListening() {
+    private func stopListening() {
         alamoManager?.stopListening()
     }
 }
