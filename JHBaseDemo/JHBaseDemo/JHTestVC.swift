@@ -19,13 +19,6 @@ class JHTestVC: JHBaseNavVC {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.backgroundColor = .randomColor()
         test()
-        let baiduURL = "baidu.com".fullURL
-        JN.get(baiduURL).success { data, response in
-            print(response.debugDescription)
-        }.failed { error, response in
-            let desc = error?.errorDesc ?? ""
-            print(desc)
-        }
     }
     
     public func test() -> Void {

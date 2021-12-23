@@ -8,8 +8,6 @@
 import UIKit
 import Alamofire
 
-public let JNStatusManager = JHBaseStatusManager.shared
-
 public let kJHBaseStatusNotiName = Notification.Name("kJHBaseNetStatusChanged")
 
 public enum JHBaseNetStatus: String {
@@ -19,8 +17,6 @@ public enum JHBaseNetStatus: String {
 }
 
 public class JHBaseStatusManager: NSObject {
-    public static let shared = JHBaseStatusManager()
-    
     // MARK: - API
     public static var currentStauts: JHBaseNetStatus { shared.currentStauts }
     public static var isReachable: Bool { shared.isReachable }
@@ -30,7 +26,11 @@ public class JHBaseStatusManager: NSObject {
     public static func stopListening() { shared.stopListening() }
     
     // MARK: - Private
-    private override init() {}
+    private static let shared = JHBaseStatusManager()
+    private override init() {
+        super.init()
+        startListening()
+    }
     private let alamoManager = NetworkReachabilityManager.default
     private var currentStauts: JHBaseNetStatus = JHBaseNetStatus.cellular
     
@@ -58,7 +58,8 @@ public class JHBaseStatusManager: NSObject {
                 strongSelf.currentStauts = JHBaseNetStatus.wifi
             }
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: kJHBaseStatusNotiName, object: strongSelf.currentStauts)
+                let notiObj = strongSelf.currentStauts.rawValue
+                NotificationCenter.default.post(name: kJHBaseStatusNotiName, object: notiObj)
             }
         })
     }
