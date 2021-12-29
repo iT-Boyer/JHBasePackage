@@ -6,6 +6,8 @@
 //  String 便利方法
 
 import Foundation
+import CoreGraphics
+import UIKit
 
 // MARK: - String to NSObjct
 extension String {
@@ -41,4 +43,18 @@ extension String {
         }
         return tmpRange
     }
+    
+    public static func textHeight(text: String, fontSize: CGFloat, width: CGFloat) -> CGFloat {
+        let height = text.boundingRect(with:CGSize(width: width, height:CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [.font:UIFont.systemFont(ofSize: fontSize)], context:nil).size.height
+        return height
+    }
+    
+    public static func textWidth(text: String, fontSize: CGFloat, height: CGFloat) -> CGFloat {
+        let width = text.boundingRect(with:CGSize(width:CGFloat(MAXFLOAT), height: height), options: .usesLineFragmentOrigin, attributes: [.font:UIFont.systemFont(ofSize: fontSize)], context:nil).size.width
+        return width
+
+    }
+    
+    
+    
 }
