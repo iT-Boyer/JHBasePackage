@@ -44,11 +44,25 @@ extension String {
         return tmpRange
     }
     
+    
+    /// 获取字符串高度
+    /// - Parameters:
+    ///   - text: 字符串
+    ///   - fontSize: 字体
+    ///   - width: 限制宽度
+    /// - Returns: 字符高度
     public static func textHeight(text: String, fontSize: CGFloat, width: CGFloat) -> CGFloat {
         let height = text.boundingRect(with:CGSize(width: width, height:CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [.font:UIFont.systemFont(ofSize: fontSize)], context:nil).size.height
         return height
     }
     
+    
+    /// 获取字符串宽度
+    /// - Parameters:
+    ///   - text: 字符串
+    ///   - fontSize: 字体
+    ///   - height: 限制高度
+    /// - Returns: 字符串宽度
     public static func textWidth(text: String, fontSize: CGFloat, height: CGFloat) -> CGFloat {
         let width = text.boundingRect(with:CGSize(width:CGFloat(MAXFLOAT), height: height), options: .usesLineFragmentOrigin, attributes: [.font:UIFont.systemFont(ofSize: fontSize)], context:nil).size.width
         return width
