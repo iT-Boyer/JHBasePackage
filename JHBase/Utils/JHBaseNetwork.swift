@@ -57,7 +57,13 @@ extension JHBaseNetwork {
         let task = JHBaseNetworkRequest()
         
         var httpHeaders: HTTPHeaders? = nil
-        if let headersDict = headers {
+        if var headersDict = headers {
+            if headersDict.index(forKey: "Content-Type") == nil {
+                headersDict["Content-Type"] = "application/json; charset=utf-8"
+            }
+            if headersDict.index(forKey: "Accept") == nil {
+                headersDict["Accept"] = "application/json"
+            }
             httpHeaders = HTTPHeaders(headersDict)
         }
         // 增加 clientInfo 公共参数
