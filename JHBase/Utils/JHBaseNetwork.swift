@@ -15,14 +15,14 @@ public class JHBaseNetwork {
     public func post(_ url: String,
                      parameters: [String: Any]? = nil,
                      headers: [String: String]? = nil) -> JHBaseNetworkRequest {
-        request(url: url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        request(url: url, method: .post, parameters: parameters, headers: headers, encoding: JSONEncoding.default)
     }
     
     @discardableResult
     public func get(_ url: String,
                     parameters: [String: Any]? = nil,
                     headers: [String: String]? = nil) -> JHBaseNetworkRequest {
-        request(url: url, method: .get, parameters: parameters, encoding: URLEncoding.default)
+        request(url: url, method: .get, parameters: parameters, headers: headers, encoding: URLEncoding.default)
     }
     
     @discardableResult
