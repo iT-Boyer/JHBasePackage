@@ -15,14 +15,14 @@ public class JHBaseNetwork {
     public func post(_ url: String,
                      parameters: [String: Any]? = nil,
                      headers: [String: String]? = nil) -> JHBaseNetworkRequest {
-        request(url: url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        request(url: url, method: .post, parameters: parameters, headers: headers, encoding: JSONEncoding.default)
     }
     
     @discardableResult
     public func get(_ url: String,
                     parameters: [String: Any]? = nil,
                     headers: [String: String]? = nil) -> JHBaseNetworkRequest {
-        request(url: url, method: .get, parameters: parameters, encoding: URLEncoding.default)
+        request(url: url, method: .get, parameters: parameters, headers: headers, encoding: URLEncoding.default)
     }
     
     @discardableResult
@@ -57,7 +57,13 @@ extension JHBaseNetwork {
         let task = JHBaseNetworkRequest()
         
         var httpHeaders: HTTPHeaders? = nil
-        if let headersDict = headers {
+        if var headersDict = headers {
+            if headersDict.index(forKey: "Content-Type") == nil {
+                headersDict["Content-Type"] = "application/json; charset=utf-8"
+            }
+            if headersDict.index(forKey: "Accept") == nil {
+                headersDict["Accept"] = "application/json"
+            }
             httpHeaders = HTTPHeaders(headersDict)
         }
         // 增加 clientInfo 公共参数
