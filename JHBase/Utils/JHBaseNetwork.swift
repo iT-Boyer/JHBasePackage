@@ -135,7 +135,9 @@ extension JHBaseNetwork {
             }
         }
         opQueue.waitUntilAllOperationsAreFinished()
-        block(resultDict)
+        DispatchQueue.main.async {
+            block(resultDict)
+        }
     }
     
     private func uploadFile(_ data: Data,
