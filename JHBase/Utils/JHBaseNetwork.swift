@@ -26,9 +26,20 @@ public class JHBaseNetwork {
     }
     
     @discardableResult
-    func upload(_ data: Data,
-                url: String,
-                headers: [String: String]? = nil) -> JHBaseNetworkRequest {
+    public func download(_ url: String) -> JHBaseNetworkRequest {
+        downloadFile(url)
+    }
+    
+    public func download(_ urls: [String], _ completionHandler: @escaping ([String: String]) -> Void) {
+        DispatchQueue(label: "com.jhbase.network").async {
+            self.downloadFiles(urls, completionHandler)
+        }
+    }
+    
+    @discardableResult
+    public func upload(_ data: Data,
+                       url: String,
+                       headers: [String: String]? = nil) -> JHBaseNetworkRequest {
         uploadFile(data, url: url, headers: headers)
     }
     
@@ -80,11 +91,51 @@ extension JHBaseNetwork {
                                   headers: httpHeaders).validate().response
         { [weak self] resp in
             guard let strongTask = weakTask, let strongSelf = self else { return }
-            strongTask.handleResponse(resp: resp)
+            strongTask.handleResponse(data: resp.data, error: resp.error, response: resp.response)
             strongSelf.taskList.removeFirst(where: { $0 == strongTask })
         }
         taskList.append(task)
         return task
+    }
+    
+    private func downloadFile(_ url: String) -> JHBaseNetworkRequest {
+        let task = JHBaseNetworkRequest()
+        weak var weakTask = task
+        
+        task.request = AF.download(url).downloadProgress { progress in
+            guard let strongTask = weakTask else { return }
+            strongTask.handleProgress(progress: progress)
+        }.validate().responseData { [weak self] resp in
+            guard let strongTask = weakTask, let strongSelf = self else { return }
+            strongTask.handleResponse(data: resp.value, error: resp.error,
+                                      response: resp.response, filePath: resp.fileURL?.path)
+            strongSelf.taskList.removeFirst(where: { $0 == strongTask })
+        }
+        
+        taskList.append(task)
+        return task
+    }
+    
+    private func downloadFiles(_ urls: [String], _ block: @escaping ([String: String]) -> Void) {
+        let urlSet: [String] = Array(Set(urls))
+        
+        let opQueue = OperationQueue()
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        var resultDict: [String: String] = [:]
+        for url in urlSet {
+            opQueue.addOperation {
+                AF.download(url).responseData { resp in
+                    if resp.error == nil, let filePath = resp.fileURL?.path {
+                        resultDict[url] = filePath
+                    }
+                    semaphore.signal()
+                }
+                semaphore.wait()
+            }
+        }
+        opQueue.waitUntilAllOperationsAreFinished()
+        block(resultDict)
     }
     
     private func uploadFile(_ data: Data,
@@ -103,9 +154,10 @@ extension JHBaseNetwork {
             strongTask.handleProgress(progress: progress)
         }.validate().response { [weak self] resp in
             guard let strongTask = weakTask, let strongSelf = self else { return }
-            strongTask.handleResponse(resp: resp)
+            strongTask.handleResponse(data: resp.data, error: resp.error, response: resp.response)
             strongSelf.taskList.removeFirst(where: { $0 == strongTask })
         }
+        
         taskList.append(task)
         return task
     }
@@ -155,9 +207,13 @@ public class JHBaseNetworkRequest: Equatable {
     }
     
     // MARK: - Private
-    fileprivate func handleResponse(resp: AFDataResponse<Data?>) {
+    fileprivate func handleResponse(data: Data? = nil,
+                                    error: AFError? = nil,
+                                    response: HTTPURLResponse? = nil,
+                                    filePath: String? = nil) {
         if let responseHandler = responseHandler {
-            let baseResp = convertResponse(data: resp.data, error: resp.error, response: resp.response)
+            let baseResp = convertResponse(data: data, error: error, response: response)
+            baseResp.filePath = filePath
             responseHandler(baseResp)
         }
     }
@@ -191,6 +247,8 @@ public class JHBaseNetworkResponse {
     
     public let statusCode: Int?
     public let headers: [String: String]?
+    
+    public var filePath: String? = nil
     
     init(data: Data?, error: JHBaseNetworkError?,
          statusCode: Int?, headers: [String: String]?) {
