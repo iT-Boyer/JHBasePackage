@@ -68,7 +68,15 @@ extension String {
         return width
 
     }
-    
-    
-    
+}
+
+extension String {
+    //去掉字符串中特殊字符
+    func deleteSpecialCharacters() -> String {
+        let pattern: String = "[^a-zA-Z0-9\u{4e00}-\u{9fa5}]"
+        guard let express = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else{
+            return self
+        }
+        return express.stringByReplacingMatches(in: self, options: [], range: NSMakeRange(0, self.count), withTemplate: "")
+    }
 }
