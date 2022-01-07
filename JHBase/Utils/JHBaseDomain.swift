@@ -17,6 +17,12 @@ public class JHBaseDomain: NSObject {
         //TODO: - 待增加私有化逻辑
         guard let domainKey = key, domainKey.isEmpty == false else { return "" }
         let domain = shared.ipFileDict[domainKey.lowercased()] ?? ""
+        // 判断是否域名私有化
+        let isContain = shared.privateWhiteList.contains(domainKey.lowercased())
+        if shared.privateDomain.isEmpty == false && isContain == false {
+            let priDomain = domain.replacingOccurrences(of: "iuoooo", with: shared.privateDomain)
+            return priDomain
+        }
         return domain
     }
     
@@ -93,4 +99,22 @@ public class JHBaseDomain: NSObject {
                          "bbs.iuoooo.com"]
         return whiteList
     }()
+    
+    // 私有化域名
+    private lazy var privateDomain: String = {
+        if let domainStr = Bundle.main.infoDictionary?["kPrivateDomain"] as? String {
+            return domainStr
+        }
+        return ""
+    }()
+    
+    // 私有化域名白名单key列表，逗号隔开
+    private lazy var privateWhiteList: [String] = {
+        if let whiteStr = Bundle.main.infoDictionary?["kPrivateWhiteList"] as? String {
+            let whiteList = whiteStr.components(separatedBy: ",")
+            return whiteList.map { $0.lowercased() }
+        }
+        return []
+    }()
+    
 }
