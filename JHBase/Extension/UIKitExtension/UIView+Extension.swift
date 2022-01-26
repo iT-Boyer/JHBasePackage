@@ -8,9 +8,103 @@
 import UIKit
 
 extension UIView: JHUIKitCompatible {}
-// MARK: 1、手势的扩展
+
+// MARK:一、UIView 有关 Frame 的扩展
+public extension JHUIKit where Base: UIView{
+    // MARK: 1.1、x 的位置
+    /// x 的位置
+    var x: CGFloat {
+        get {
+            return base.frame.origin.x
+        }
+        set(newValue) {
+            var tempFrame: CGRect = base.frame
+            tempFrame.origin.x = newValue
+            base.frame = tempFrame
+        }
+    }
+    // MARK: 1.2、y 的位置
+    /// y 的位置
+    var y: CGFloat {
+        get {
+            return base.frame.origin.y
+        }
+        set(newValue) {
+            var tempFrame: CGRect = base.frame
+            tempFrame.origin.y = newValue
+            base.frame = tempFrame
+        }
+    }
+    
+    // MARK: 1.3、height: 视图的高度
+    /// height: 视图的高度
+    var height: CGFloat {
+        get {
+            return base.frame.size.height
+        }
+        set(newValue) {
+            var tempFrame: CGRect = base.frame
+            tempFrame.size.height = newValue
+            base.frame = tempFrame
+        }
+    }
+    
+    // MARK: 1.4、width: 视图的宽度
+    /// width: 视图的宽度
+    var width: CGFloat {
+        get {
+            return base.frame.size.width
+        }
+        set(newValue) {
+            var tempFrame: CGRect = base.frame
+            tempFrame.size.width = newValue
+            base.frame = tempFrame
+        }
+    }
+    
+    // MARK: 1.5、size: 视图的zize
+    /// size: 视图的zize
+    var size: CGSize {
+        get {
+            return base.frame.size
+        }
+        set(newValue) {
+            var tempFrame: CGRect = base.frame
+            tempFrame.size = newValue
+            base.frame = tempFrame
+        }
+    }
+    
+    // MARK: 1.6、centerX: 视图的X中间位置
+    /// centerX: 视图的X中间位置
+    var centerX: CGFloat {
+        get {
+            return base.center.x
+        }
+        set(newValue) {
+            var tempCenter: CGPoint = base.center
+            tempCenter.x = newValue
+            base.center = tempCenter
+        }
+    }
+    
+    // MARK: 1.7、centerY: 视图的Y中间位置
+    /// centerY: 视图Y的中间位置
+    var centerY: CGFloat {
+        get {
+            return base.center.y
+        }
+        set(newValue) {
+            var tempCenter: CGPoint = base.center
+            tempCenter.y = newValue
+            base.center = tempCenter
+        }
+    }
+}
+
+// MARK: 2、手势的扩展
 public extension JHUIKit where Base: UIView {
-    // MARK: 1.1、通用响应添加方法
+    // MARK: 2.1、通用响应添加方法
     /// 通用响应添加方法
     /// - Parameter actionClosure: 时间回调
     func addActionClosure(_ actionClosure: @escaping ViewClosure) {
@@ -32,7 +126,7 @@ public extension JHUIKit where Base: UIView {
         }
     }
     
-    // MARK: 1.2、手势 - 单击
+    // MARK: 2.2、手势 - 单击
     /// 手势 - 单击
     /// - Parameter action: 事件
     /// - Returns: 手势
@@ -56,4 +150,5 @@ public extension JHUIKit where Base: UIView {
         base.isMultipleTouchEnabled = true
         base.addGestureRecognizer(gestureRecognizer)
     }
+
 }
