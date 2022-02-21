@@ -10,7 +10,7 @@ import SnapKit
 
 // MARK: - JHBaseNavVC
 
-open class JHBaseNavVC: UIViewController {
+@objcMembers open class JHBaseNavVC: UIViewController {
     
     @objc public var navTitle: String? {
         didSet {
@@ -135,7 +135,7 @@ open class JHBaseNavVC: UIViewController {
 
 // MARK: - JHBaseNavBar
 
-public class JHBaseNavBar: UIView {
+@objcMembers public class JHBaseNavBar: UIView {
     
     public var navTitle: String? {
         didSet {
@@ -207,7 +207,7 @@ public class JHBaseNavBar: UIView {
 
 // MARK: - JHBaseEmptyView
 
-public class JHBaseEmptyView: UIView {
+@objcMembers public class JHBaseEmptyView: UIView {
     
     // MARK: - Init
     

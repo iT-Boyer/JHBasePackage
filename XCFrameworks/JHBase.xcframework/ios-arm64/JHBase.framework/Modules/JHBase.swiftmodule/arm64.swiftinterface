@@ -1,0 +1,512 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name JHBase
+import Alamofire
+import CoreGraphics
+import Foundation
+import SnapKit
+import Swift
+import SwifterSwift
+import UIKit
+import _Concurrency
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class JHBaseInfo : ObjectiveC.NSObject {
+  public static let shared: JHBase.JHBaseInfo
+  public static var orgID: Swift.String {
+    get
+  }
+  public static var appID: Swift.String {
+    get
+  }
+  public static var appName: Swift.String {
+    get
+  }
+  public static var appVersion: Swift.String {
+    get
+  }
+  public static var userID: Swift.String {
+    get
+  }
+  public static var userAccount: Swift.String {
+    get
+  }
+  public static var isLogined: Swift.Bool {
+    get
+  }
+  public static var isOfficialLogined: Swift.Bool {
+    get
+  }
+  @objc deinit
+}
+extension Foundation.NSString {
+  public func isEmptyOrNull() -> Swift.Bool
+  public static func isEmptyOrNull(_ content: Swift.String?) -> Swift.Bool
+}
+@objc extension UIKit.UIGestureRecognizer {
+  @objc @_Concurrency.MainActor(unsafe) dynamic public var funcName: Swift.String {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) dynamic public func addAction(_ closure: @escaping (UIKit.UIGestureRecognizer) -> Swift.Void)
+}
+extension UIKit.UIColor {
+  public static let kClear: UIKit.UIColor
+  public static let k119B83: UIKit.UIColor
+  public static let k151515: UIKit.UIColor
+  public static let k0ED72F: UIKit.UIColor
+  public static let k02BC9B: UIKit.UIColor
+  public static let k04BD81: UIKit.UIColor
+  public static let k999999: UIKit.UIColor
+  public static let k86B94A: UIKit.UIColor
+  public static let k87BA4B: UIKit.UIColor
+  public static let kA3A3A3: UIKit.UIColor
+  public static let kFC6767: UIKit.UIColor
+  public static let kFF9F4F: UIKit.UIColor
+  public static let kFF4242: UIKit.UIColor
+  public static let k4AD1C0: UIKit.UIColor
+  public static let kFF5858: UIKit.UIColor
+  public static let kFF5252: UIKit.UIColor
+  public static let k666666: UIKit.UIColor
+  public static let kBBBBBB: UIKit.UIColor
+  public static let kF6F6F6: UIKit.UIColor
+  public static let kF9F9F9: UIKit.UIColor
+  public static let kF64610: UIKit.UIColor
+  public static let kF6FFEA: UIKit.UIColor
+  public static let k32D4FF: UIKit.UIColor
+  public static let k333333: UIKit.UIColor
+  public static let k3BA7FE: UIKit.UIColor
+  public static let k3B92FF: UIKit.UIColor
+  public static let k3F3F3F: UIKit.UIColor
+  public static let k5A5A61: UIKit.UIColor
+  public static let kFF5F4B: UIKit.UIColor
+  public static let kFF754B: UIKit.UIColor
+  public static let kFF9C23: UIKit.UIColor
+  public static let kFF9637: UIKit.UIColor
+  public static let kFFFFFF: UIKit.UIColor
+  public static let kF1F1F1: UIKit.UIColor
+  public static let kF2F2F2: UIKit.UIColor
+  public static let kF4F4F4: UIKit.UIColor
+  public static let kF5F5F5: UIKit.UIColor
+  public static let kBFBFBF: UIKit.UIColor
+  public static let kE0E0E0: UIKit.UIColor
+  public static let kE1E1E1: UIKit.UIColor
+  public static let kE3E3E3: UIKit.UIColor
+  public static let kE5E5E5: UIKit.UIColor
+  public static let kE6E6E6: UIKit.UIColor
+  public static let kE7E7E7: UIKit.UIColor
+  public static let kE9E9E9: UIKit.UIColor
+  public static let kEAEAEA: UIKit.UIColor
+  public static let kEEEEEE: UIKit.UIColor
+  public static let k000000: UIKit.UIColor
+  public static let kC4C4C4: UIKit.UIColor
+  public static let kC1C1C1: UIKit.UIColor
+  public static let kADADAD: UIKit.UIColor
+  public static let kD3D3D3: UIKit.UIColor
+  public static let kD6D6D6: UIKit.UIColor
+  public static let kD8D8D8: UIKit.UIColor
+  public static let kFF2828: UIKit.UIColor
+  public static let kFF6363: UIKit.UIColor
+  public static let kFF8123: UIKit.UIColor
+  public static let kFFEFDC: UIKit.UIColor
+  public static let k7E7E7E: UIKit.UIColor
+  public static let kFF3B2F: UIKit.UIColor
+  public static let k007AFF: UIKit.UIColor
+  public static let k00B317: UIKit.UIColor
+  public static let k2D92FF: UIKit.UIColor
+  public static let k249EFF: UIKit.UIColor
+  public static let k70B6FE: UIKit.UIColor
+  public static let k788193: UIKit.UIColor
+  public static let k409BFF: UIKit.UIColor
+  public static let k29CF42: UIKit.UIColor
+  public static let kF8F8F8: UIKit.UIColor
+  public static let kF5FFEA: UIKit.UIColor
+  public static let k363636: UIKit.UIColor
+  public static let kEC8200: UIKit.UIColor
+  public static let kB8BCCB: UIKit.UIColor
+  public static let k0DCC62: UIKit.UIColor
+  public static let k0D81FF: UIKit.UIColor
+  public static let kFF6969: UIKit.UIColor
+  public static let k02040B: UIKit.UIColor
+  public static let kFFF4E7: UIKit.UIColor
+  public static let kFF7E26: UIKit.UIColor
+  public static let kFAA500: UIKit.UIColor
+  public static let k48FF3A: UIKit.UIColor
+  public static let kFF8B09: UIKit.UIColor
+  public static let kFF7070: UIKit.UIColor
+  public static let kBEBEBE: UIKit.UIColor
+  public static let k99A0B6: UIKit.UIColor
+  public static let k2F3856: UIKit.UIColor
+  public static let k428BFE: UIKit.UIColor
+  public static let kECECEC: UIKit.UIColor
+  public static let k42DA7F: UIKit.UIColor
+  public static let k2F3755: UIKit.UIColor
+  public static let k999FB5: UIKit.UIColor
+  public static let kDB2727: UIKit.UIColor
+  public static let k599199: UIKit.UIColor
+  public static let kFDCB85: UIKit.UIColor
+  public static let kFFCD53: UIKit.UIColor
+  public static let kDC2828: UIKit.UIColor
+  public static let kDFDFDF: UIKit.UIColor
+  public static let kE2E6EF: UIKit.UIColor
+  public static let kE6E6F0: UIKit.UIColor
+  public static let k8A8A8A: UIKit.UIColor
+  public static let k414755: UIKit.UIColor
+  public static let k5E637B: UIKit.UIColor
+  public static let kFCFCFC: UIKit.UIColor
+  public static let kF7F7F7: UIKit.UIColor
+  public static let kDEE0E3: UIKit.UIColor
+  public static let kFF9A1C: UIKit.UIColor
+  public static let k04A174: UIKit.UIColor
+  public static let k686868: UIKit.UIColor
+  public static let kFA5555: UIKit.UIColor
+  public static let k0C0F20: UIKit.UIColor
+  public static let kFBEBDB: UIKit.UIColor
+  public static let k27282B: UIKit.UIColor
+  public static let k353638: UIKit.UIColor
+  public static let k777777: UIKit.UIColor
+  public static let kFF6934: UIKit.UIColor
+  public static let kFABC00: UIKit.UIColor
+  public static let kECECED: UIKit.UIColor
+  public static let kB0B9D2: UIKit.UIColor
+  public static let kFFE9F2: UIKit.UIColor
+  public static let kFF9F23: UIKit.UIColor
+  public static let kFFEEA4: UIKit.UIColor
+  public static let kF4433F: UIKit.UIColor
+  public static let kFF6B34: UIKit.UIColor
+  public static let k2CD773: UIKit.UIColor
+  public static let kE04337: UIKit.UIColor
+  public static let kC4C8D4: UIKit.UIColor
+  public static let k3FDA7F: UIKit.UIColor
+  public static let kFFD68F: UIKit.UIColor
+  public static let kCECECE: UIKit.UIColor
+  public static let kB5B5B5: UIKit.UIColor
+  public static let k060710: UIKit.UIColor
+  public static let kEFEFEF: UIKit.UIColor
+  public static let k6E738C: UIKit.UIColor
+  public static let k146FD1: UIKit.UIColor
+  public static let kDBDBDB: UIKit.UIColor
+  public static let kFCEAEC: UIKit.UIColor
+  public static let kDE354B: UIKit.UIColor
+  public static let kDDDDDD: UIKit.UIColor
+  public static let kFF6933: UIKit.UIColor
+  public static let kFF6531: UIKit.UIColor
+  public static let kABAAAA: UIKit.UIColor
+  public static let kFEF5CC: UIKit.UIColor
+  public static let kF0F0F0: UIKit.UIColor
+  public static let kECCAA0: UIKit.UIColor
+  public static let kFFE0D6: UIKit.UIColor
+  public static let kFEF4F1: UIKit.UIColor
+  public static let kFE8D08: UIKit.UIColor
+  public static let kFFF3CC: UIKit.UIColor
+  public static let kCFCFCF: UIKit.UIColor
+  public static let k136FD0: UIKit.UIColor
+  public static let k9B9B9B: UIKit.UIColor
+  public static let kFF6A34: UIKit.UIColor
+  public static let k111A39: UIKit.UIColor
+  public static let kF90A06: UIKit.UIColor
+  public static let kFF6631: UIKit.UIColor
+  public static let kFEB332: UIKit.UIColor
+  public static let kF96813: UIKit.UIColor
+  public static let kE5F5F1: UIKit.UIColor
+  public static let k6B6B79: UIKit.UIColor
+  public static let k707070: UIKit.UIColor
+  public static let kA0A0A0: UIKit.UIColor
+  public static let kF4F5F7: UIKit.UIColor
+}
+@objc extension UIKit.UIColor {
+  @objc public static func initWithHex(_ hex: Swift.String) -> UIKit.UIColor
+  @objc public static func initWithHex(_ hex: Swift.String, alpha: CoreGraphics.CGFloat = 1.0) -> UIKit.UIColor
+  @objc public static func randomColor() -> UIKit.UIColor
+}
+extension JHBase.JHUIKit where Base : UIKit.UIButton {
+  public func setHandleClick(controlEvents: UIKit.UIControl.Event = .touchUpInside, buttonCallBack: ((_ button: UIKit.UIButton?) -> ())?)
+}
+public func jh_getAssociatedObject<T>(_ object: Any, _ key: Swift.UnsafeRawPointer) -> T?
+public func jh_setRetainedAssociatedObject<T>(_ object: Any, _ key: Swift.UnsafeRawPointer, _ value: T, _ policy: ObjectiveC.objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+public let kScreenBounds: CoreGraphics.CGRect
+public let kScreenWidth: CoreGraphics.CGFloat
+public let kScreenHeight: CoreGraphics.CGFloat
+public let kScreenScale: CoreGraphics.CGFloat
+public let kEmptyBottomHeight: CoreGraphics.CGFloat
+public let kTabbarHeight: CoreGraphics.CGFloat
+public let kNaviBarHeight: CoreGraphics.CGFloat
+public let kNaviBarMaxY: CoreGraphics.CGFloat
+public var kPhoneXSeries: Swift.Bool {
+  get
+}
+public var kStatusBarHeight: CoreGraphics.CGFloat {
+  get
+}
+public func kWidth(width: CoreGraphics.CGFloat) -> CoreGraphics.CGFloat
+public func kHeight(height: CoreGraphics.CGFloat) -> CoreGraphics.CGFloat
+public var kWindow: UIKit.UIWindow? {
+  get
+}
+@objc @objcMembers @_Concurrency.MainActor(unsafe) open class JHBaseNavVC : UIKit.UIViewController {
+  @objc @_Concurrency.MainActor(unsafe) public var navTitle: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public init()
+  @objc @_Concurrency.MainActor(unsafe) public init(title: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @objc @_Concurrency.MainActor(unsafe) open func backBtnClicked(_ btn: UIKit.UIButton)
+  @objc @_Concurrency.MainActor(unsafe) open func refreshBtnClicked(_ btn: UIKit.UIButton)
+  @objc @_Concurrency.MainActor(unsafe) open func refreshImgClicked(_ btn: UIKit.UIButton)
+  @objc @discardableResult
+  @_Concurrency.MainActor(unsafe) public func showNoDataView(_ superView: UIKit.UIView? = nil, imgName: Swift.String? = nil, tipMsg: Swift.String? = nil) -> Self
+  @objc @discardableResult
+  @_Concurrency.MainActor(unsafe) public func showNoInternet(_ superView: UIKit.UIView? = nil, imgName: Swift.String? = nil, tipMsg: Swift.String? = nil) -> Self
+  @objc @discardableResult
+  @_Concurrency.MainActor(unsafe) public func hideEmptyView() -> Self
+  @objc @_Concurrency.MainActor(unsafe) public var navBar: JHBase.JHBaseNavBar {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) public var emptyView: JHBase.JHBaseEmptyView {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @_Concurrency.MainActor(unsafe) public class JHBaseNavBar : UIKit.UIView {
+  @objc @_Concurrency.MainActor(unsafe) public var navTitle: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc @_Concurrency.MainActor(unsafe) public var titleLabel: UIKit.UILabel {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) public var backBtn: UIKit.UIButton {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) public var lineView: UIKit.UIView {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @_Concurrency.MainActor(unsafe) public class JHBaseEmptyView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc @_Concurrency.MainActor(unsafe) public var titleLabel: UIKit.UILabel {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) public var imgBtn: UIKit.UIButton {
+    @objc get
+    @objc set
+  }
+  @objc @_Concurrency.MainActor(unsafe) public var refreshBtn: UIKit.UIButton {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+extension UIKit.UIFont {
+  public static let kFont11: UIKit.UIFont
+  public static let kFont12: UIKit.UIFont
+  public static let kFont13: UIKit.UIFont
+  public static let kFont14: UIKit.UIFont
+  public static let kFont15: UIKit.UIFont
+  public static let kFont16: UIKit.UIFont
+  public static let kFont17: UIKit.UIFont
+  public static let kFont18: UIKit.UIFont
+  public static let kFont19: UIKit.UIFont
+  public static let kFont20: UIKit.UIFont
+  public static let kFont21: UIKit.UIFont
+  public static let kFont22: UIKit.UIFont
+  public static let kFont23: UIKit.UIFont
+  public static let kFont24: UIKit.UIFont
+  public static let kBoldFont11: UIKit.UIFont
+  public static let kBoldFont12: UIKit.UIFont
+  public static let kBoldFont13: UIKit.UIFont
+  public static let kBoldFont14: UIKit.UIFont
+  public static let kBoldFont15: UIKit.UIFont
+  public static let kBoldFont16: UIKit.UIFont
+  public static let kBoldFont17: UIKit.UIFont
+  public static let kBoldFont18: UIKit.UIFont
+  public static let kBoldFont19: UIKit.UIFont
+  public static let kBoldFont20: UIKit.UIFont
+  public static let kBoldFont21: UIKit.UIFont
+  public static let kBoldFont22: UIKit.UIFont
+  public static let kBoldFont23: UIKit.UIFont
+  public static let kBoldFont24: UIKit.UIFont
+}
+extension Swift.String {
+  public var fullURL: Swift.String {
+    get
+  }
+}
+public typealias JHTask = () -> Swift.Void
+public struct JHAsyncs {
+  @discardableResult
+  public static func async(_ JHTask: @escaping JHBase.JHTask) -> Dispatch.DispatchWorkItem
+  @discardableResult
+  public static func async(_ JHTask: @escaping JHBase.JHTask, _ mainJHTask: @escaping JHBase.JHTask) -> Dispatch.DispatchWorkItem
+  @discardableResult
+  public static func asyncDelay(_ seconds: Swift.Double, _ JHTask: @escaping JHBase.JHTask) -> Dispatch.DispatchWorkItem
+  @discardableResult
+  public static func asyncDelay(_ seconds: Swift.Double, _ JHTask: @escaping JHBase.JHTask, _ mainJHTask: @escaping JHBase.JHTask) -> Dispatch.DispatchWorkItem
+}
+extension UIKit.UIView : JHBase.JHUIKitCompatible {
+}
+extension JHBase.JHUIKit where Base : UIKit.UIView {
+  public func addActionClosure(_ actionClosure: @escaping JHBase.ViewClosure)
+  @discardableResult
+  public func addGestureTap(_ action: @escaping JHBase.RecognizerClosure) -> UIKit.UITapGestureRecognizer
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class JHBaseDomain : ObjectiveC.NSObject {
+  public static let shared: JHBase.JHBaseDomain
+  public static let netProtocol: Swift.String
+  public static let environment: Swift.String
+  public static let uploadURL: Swift.String
+  public static let downloadURL: Swift.String
+  public static func domain(for key: Swift.String?) -> Swift.String
+  public static func fullURL(with key: Swift.String?, path: Swift.String?) -> Swift.String
+  public static func changeProtocol(with url: Swift.String?) -> Swift.String
+  @objc deinit
+}
+@objc extension Foundation.NSDate {
+  @objc public static func timestampSince1970() -> Swift.String
+  @objc public static func changeTimeStampToString(timeStamp: Swift.String) -> Swift.String
+}
+public typealias ViewClosure = ((UIKit.UITapGestureRecognizer?, UIKit.UIView, ObjectiveC.NSInteger) -> Swift.Void)
+public typealias RecognizerClosure = ((UIKit.UIGestureRecognizer) -> Swift.Void)
+public typealias ControlClosure = ((UIKit.UIControl) -> Swift.Void)
+@objc @_inheritsConvenienceInitializers public class JHBaseAlert : ObjectiveC.NSObject {
+  public static func showSheet(title: Swift.String? = nil, msg: Swift.String? = nil, btns: [Swift.String]? = nil, types: [UIKit.UIAlertAction.Style]? = nil, handler: ((Swift.Int) -> Swift.Void)? = nil)
+  public static func showAlert(title: Swift.String? = nil, msg: Swift.String? = nil, btns: [Swift.String]? = nil, types: [UIKit.UIAlertAction.Style]? = nil, handler: ((Swift.Int) -> Swift.Void)? = nil)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public let kJHBaseStatusNotiName: Foundation.Notification.Name
+public enum JHBaseNetStatus : Swift.String {
+  case unavailable
+  case cellular
+  case wifi
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class JHBaseStatusManager : ObjectiveC.NSObject {
+  public static var currentStauts: JHBase.JHBaseNetStatus {
+    get
+  }
+  public static var isReachable: Swift.Bool {
+    get
+  }
+  public static var isWiFi: Swift.Bool {
+    get
+  }
+  public static var isCellular: Swift.Bool {
+    get
+  }
+  public static func startListening()
+  public static func stopListening()
+  @objc deinit
+}
+public let JN: JHBase.JHBaseNetwork
+@_hasMissingDesignatedInitializers public class JHBaseNetwork {
+  public static let shared: JHBase.JHBaseNetwork
+  @discardableResult
+  public func post(_ url: Swift.String, parameters: [Swift.String : Any]? = nil, headers: [Swift.String : Swift.String]? = nil) -> JHBase.JHBaseNetworkRequest
+  @discardableResult
+  public func get(_ url: Swift.String, parameters: [Swift.String : Any]? = nil, headers: [Swift.String : Swift.String]? = nil) -> JHBase.JHBaseNetworkRequest
+  @discardableResult
+  public func download(_ url: Swift.String) -> JHBase.JHBaseNetworkRequest
+  public func download(_ urls: [Swift.String], _ completionHandler: @escaping ([Swift.String : Swift.String]) -> Swift.Void)
+  @discardableResult
+  public func upload(_ data: Foundation.Data, url: Swift.String, headers: [Swift.String : Swift.String]? = nil) -> JHBase.JHBaseNetworkRequest
+  public func cancelAll()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class JHBaseNetworkRequest : Swift.Equatable {
+  public typealias JHBaseResponseClosure = (JHBase.JHBaseNetworkResponse) -> Swift.Void
+  public typealias JHBaseProgressClosure = (Foundation.Progress) -> Swift.Void
+  @discardableResult
+  public func response(_ closure: @escaping JHBase.JHBaseNetworkRequest.JHBaseResponseClosure) -> Self
+  @discardableResult
+  public func progress(closure: @escaping JHBase.JHBaseNetworkRequest.JHBaseProgressClosure) -> Self
+  public func cancel()
+  public static func == (lhs: JHBase.JHBaseNetworkRequest, rhs: JHBase.JHBaseNetworkRequest) -> Swift.Bool
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class JHBaseNetworkResponse {
+  final public let data: Foundation.Data?
+  final public let error: JHBase.JHBaseNetworkError?
+  final public let statusCode: Swift.Int?
+  final public let headers: [Swift.String : Swift.String]?
+  public var filePath: Swift.String?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class JHBaseNetworkError {
+  final public let errorCode: Swift.Int?
+  final public let errorDesc: Swift.String?
+  @objc deinit
+}
+public struct JHUIKit<Base> {
+}
+public protocol JHUIKitCompatible {
+}
+extension JHBase.JHUIKitCompatible {
+  public static var jh: JHBase.JHUIKit<Self>.Type {
+    get
+    set
+  }
+  public var jh: JHBase.JHUIKit<Self> {
+    get
+    set
+  }
+}
+extension ObjectiveC.NSObject {
+  @discardableResult
+  public static func callFunc(_ aSelector: Swift.String, _ param1: Swift.AnyObject? = nil, _ param2: Swift.AnyObject? = nil) -> Swift.AnyObject?
+  @discardableResult
+  public func callFunc(_ aSelector: Swift.String, _ param1: Swift.AnyObject? = nil, _ param2: Swift.AnyObject? = nil) -> Swift.AnyObject?
+}
+extension Swift.String {
+  public var toNSClass: ObjectiveC.NSObject.Type? {
+    get
+  }
+  public var toNSObject: ObjectiveC.NSObject? {
+    get
+  }
+}
+extension Swift.String {
+  public func getNSRange(of subString: Swift.String, _ caseInsensitive: Swift.Bool = false) -> Foundation.NSRange?
+  public static func textHeight(text: Swift.String?, fontSize: CoreGraphics.CGFloat, width: CoreGraphics.CGFloat) -> CoreGraphics.CGFloat
+  public static func textWidth(text: Swift.String?, fontSize: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat) -> CoreGraphics.CGFloat
+}
+extension Swift.String {
+  public func deleteSpecialCharacters() -> Swift.String
+}
+extension JHBase.JHUIKit where Base : UIKit.UIControl {
+  public func preventDoubleHit(_ hitTime: Swift.Double = 1)
+  public func addActionHandler(_ action: @escaping JHBase.ControlClosure, for controlEvents: UIKit.UIControl.Event = .touchUpInside)
+}
+extension Foundation.URL {
+  public static func changProtocolURL(with urlString: Swift.String?) -> Foundation.URL?
+}
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public static var topVC: UIKit.UIViewController? {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public static var topMostVC: UIKit.UIViewController? {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public static var getRootPresentedVC: UIKit.UIViewController? {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public static var getRootNaviTopVC: UIKit.UIViewController? {
+    get
+  }
+}
+extension JHBase.JHBaseNetStatus : Swift.Equatable {}
+extension JHBase.JHBaseNetStatus : Swift.Hashable {}
+extension JHBase.JHBaseNetStatus : Swift.RawRepresentable {}
