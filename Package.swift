@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "JHBase",
-    platforms: [.iOS(.v11)],
+    platforms: [.iOS(.v12)],
     products: [
         //.library(name: "JHBase", type: .static, targets: ["JHBase"]),
         .library(name: "JHBase", targets: ["JHBase"]),
