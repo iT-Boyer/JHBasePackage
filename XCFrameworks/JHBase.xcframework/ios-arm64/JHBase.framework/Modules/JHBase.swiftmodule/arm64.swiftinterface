@@ -41,12 +41,12 @@ extension Foundation.NSString {
   public func isEmptyOrNull() -> Swift.Bool
   public static func isEmptyOrNull(_ content: Swift.String?) -> Swift.Bool
 }
-@objc extension UIKit.UIGestureRecognizer {
-  @objc @_Concurrency.MainActor(unsafe) dynamic public var funcName: Swift.String {
-    @objc get
-    @objc set
+extension UIKit.UIGestureRecognizer {
+  @_Concurrency.MainActor(unsafe) public var funcName: Swift.String {
+    get
+    set
   }
-  @objc @_Concurrency.MainActor(unsafe) dynamic public func addAction(_ closure: @escaping (UIKit.UIGestureRecognizer) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) public func addAction(_ closure: @escaping (UIKit.UIGestureRecognizer) -> Swift.Void)
 }
 extension UIKit.UIColor {
   public static let kClear: UIKit.UIColor
@@ -211,6 +211,7 @@ extension UIKit.UIColor {
   public static let k707070: UIKit.UIColor
   public static let kA0A0A0: UIKit.UIColor
   public static let kF4F5F7: UIKit.UIColor
+  public static let k606266: UIKit.UIColor
 }
 @objc extension UIKit.UIColor {
   @objc public static func initWithHex(_ hex: Swift.String) -> UIKit.UIColor
@@ -219,6 +220,21 @@ extension UIKit.UIColor {
 }
 extension JHBase.JHUIKit where Base : UIKit.UIButton {
   public func setHandleClick(controlEvents: UIKit.UIControl.Event = .touchUpInside, buttonCallBack: ((_ button: UIKit.UIButton?) -> ())?)
+}
+extension JHBase.JHUIKit where Base : UIKit.UIButton {
+  public enum ImageTitleLayout {
+    case imgTop
+    case imgBottom
+    case imgLeft
+    case imgRight
+    public static func == (a: JHBase.JHUIKit<Base>.ImageTitleLayout, b: JHBase.JHUIKit<Base>.ImageTitleLayout) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @discardableResult
+  public func setImageTitleLayout(_ layout: JHBase.JHUIKit<Base>.ImageTitleLayout, spacing: CoreGraphics.CGFloat = 0) -> UIKit.UIButton
 }
 public func jh_getAssociatedObject<T>(_ object: Any, _ key: Swift.UnsafeRawPointer) -> T?
 public func jh_setRetainedAssociatedObject<T>(_ object: Any, _ key: Swift.UnsafeRawPointer, _ value: T, _ policy: ObjectiveC.objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN_NONATOMIC)

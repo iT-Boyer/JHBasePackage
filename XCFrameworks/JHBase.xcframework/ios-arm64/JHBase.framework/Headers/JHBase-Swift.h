@@ -304,13 +304,6 @@ SWIFT_CLASS("_TtC6JHBase19JHBaseStatusManager")
 
 
 
-@interface UIGestureRecognizer (SWIFT_EXTENSION(JHBase))
-/// 方法名称(用于自定义)
-@property (nonatomic, copy) NSString * _Nonnull funcName;
-/// 闭包回调
-- (void)addAction:(void (^ _Nonnull)(UIGestureRecognizer * _Nonnull))closure;
-@end
-
 
 
 #if __has_attribute(external_source_symbol)
