@@ -172,6 +172,7 @@ extension UIColor {
     public static let k707070: UIColor = UIColor.initWithHex("707070")
     public static let kA0A0A0: UIColor = UIColor.initWithHex("A0A0A0")
     public static let kF4F5F7: UIColor = UIColor.initWithHex("F4F5F7")
+    public static let k606266: UIColor = UIColor.initWithHex("606266")
 }
 
 // MARK: - Hex to UIColor
