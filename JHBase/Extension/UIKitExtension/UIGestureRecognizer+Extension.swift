@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc extension UIGestureRecognizer {
+extension UIGestureRecognizer {
     
     private struct AssociateKeys {
         static var funcName = "UIGestureRecognizer" + "funcName"
@@ -36,7 +36,7 @@ import UIKit
         addTarget(self, action: #selector(p_invoke))
     }
     
-    private func p_invoke() {
+    @objc private func p_invoke() {
         if let closure = objc_getAssociatedObject(self, &AssociateKeys.closure) as? ((UIGestureRecognizer) -> Void) {
             closure(self)
         }
