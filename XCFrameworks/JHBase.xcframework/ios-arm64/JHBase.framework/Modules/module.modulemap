@@ -1,0 +1,4 @@
+framework module JHBase {
+  header "JHBase-Swift.h"
+  requires objc
+}

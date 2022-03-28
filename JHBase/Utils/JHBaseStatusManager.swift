@@ -50,12 +50,14 @@ public class JHBaseStatusManager: NSObject {
         alamoManager?.startListening(onUpdatePerforming: { [weak self] status in
             guard let strongSelf = self else { return }
             switch status {
-            case .notReachable, .unknown:
-                strongSelf.currentStauts = JHBaseNetStatus.unavailable
             case .reachable(.cellular):
                 strongSelf.currentStauts = JHBaseNetStatus.cellular
             case .reachable(.ethernetOrWiFi):
                 strongSelf.currentStauts = JHBaseNetStatus.wifi
+            case .notReachable, .unknown:
+                strongSelf.currentStauts = JHBaseNetStatus.unavailable
+            default:
+                strongSelf.currentStauts = JHBaseNetStatus.unavailable
             }
             DispatchQueue.main.async {
                 let notiObj = strongSelf.currentStauts.rawValue
