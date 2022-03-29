@@ -31,6 +31,7 @@
 		9C274B6F279E3FCD000AB8BF /* JHBaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C274B56279E3FCD000AB8BF /* JHBaseInfo.swift */; };
 		9C274B70279E3FCD000AB8BF /* JHBaseUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C274B57279E3FCD000AB8BF /* JHBaseUI.swift */; };
 		9C274B71279E3FCD000AB8BF /* JHBaseNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C274B59279E3FCD000AB8BF /* JHBaseNavVC.swift */; };
+		E95E1D9027F2F7AF009B0CD5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E1D8F27F2F7AF009B0CD5 /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		9C274B56279E3FCD000AB8BF /* JHBaseInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHBaseInfo.swift; sourceTree = "<group>"; };
 		9C274B57279E3FCD000AB8BF /* JHBaseUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHBaseUI.swift; sourceTree = "<group>"; };
 		9C274B59279E3FCD000AB8BF /* JHBaseNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHBaseNavVC.swift; sourceTree = "<group>"; };
+		E95E1D8F27F2F7AF009B0CD5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				9C274B49279E3FCD000AB8BF /* UIView+Extension.swift */,
 				9C274B4A279E3FCD000AB8BF /* UIControl+Extension.swift */,
 				9C274B4B279E3FCD000AB8BF /* JHUIKit.swift */,
+				E95E1D8F27F2F7AF009B0CD5 /* UIImage+Extension.swift */,
 			);
 			path = UIKitExtension;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				9C274B69279E3FCD000AB8BF /* JHClosure.swift in Sources */,
 				9C274B6B279E3FCD000AB8BF /* JHBaseAlert.swift in Sources */,
 				9C274B6E279E3FCD000AB8BF /* JHBaseStatusManager.swift in Sources */,
+				E95E1D9027F2F7AF009B0CD5 /* UIImage+Extension.swift in Sources */,
 				9C274B6D279E3FCD000AB8BF /* JHBaseNetwork.swift in Sources */,
 				9C274B67279E3FCD000AB8BF /* JHUIKit.swift in Sources */,
 				9C274B60279E3FCD000AB8BF /* JHBaseObjectExt.swift in Sources */,
