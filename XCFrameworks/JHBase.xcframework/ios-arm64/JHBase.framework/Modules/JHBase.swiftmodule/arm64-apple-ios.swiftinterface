@@ -427,6 +427,9 @@ public enum JHBaseNetStatus : Swift.String {
   public static func stopListening()
   @objc deinit
 }
+extension JHBase.JHUIKit where Base : UIKit.UIImage {
+  public static func getCompressionFactor(imageLength: Swift.Float, expectLength: Swift.Float) -> Swift.Float
+}
 public let JN: JHBase.JHBaseNetwork
 @_hasMissingDesignatedInitializers public class JHBaseNetwork {
   public static let shared: JHBase.JHBaseNetwork
