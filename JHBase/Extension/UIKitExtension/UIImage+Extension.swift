@@ -7,6 +7,8 @@
 
 import UIKit
 
+extension UIImage: JHUIKitCompatible {}
+
 // MARK:- 一、UIImage 压缩相关
 public extension JHUIKit where Base: UIImage {
     //由角度转换弧度
