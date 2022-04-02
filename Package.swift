@@ -11,16 +11,14 @@ let package = Package(
         .library(name: "JHBase", targets: ["JHBase"]),
     ],
     dependencies: [
-        //.package(name: "JHThird", url: "http://192.168.9.190/publicplugingoup/JHThirdPackage.git", .branch("master"))
+      .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.4.3"),
+      .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.0.1"),
+      .package(url: "https://github.com/SwifterSwift/SwifterSwift.git", from: "5.3.0")
     ],
     targets: [
-        //.target(name: "JHBase", dependencies: [
-        //    .product(name: "SnapKit", package: "JHThird"),
-        //    .product(name: "Alamofire", package: "JHThird"),
-        //    .product(name: "SwifterSwift", package: "JHThird"),
-        //], path: "JHBase"),
-        .binaryTarget(name: "JHBase",
-                      path: "XCFrameworks/JHBase.xcframework"),
+      .target(name: "JHBase",
+              dependencies: ["SnapKit","Alamofire","SwifterSwift"],
+              path: "JHBase"),
     ],
     swiftLanguageVersions: [.v5]
 )
